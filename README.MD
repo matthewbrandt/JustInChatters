@@ -1,17 +1,14 @@
-# LurkReveal™️
+# LurkReveal&trade;
 
 ## Summary
 
-LurkReveal is a tool that you can run in Github Pages to look at what users are in your Twitch chat.
+LurkReveal&trade; is a tool that you can run in Github Pages to look at what users are in your Twitch chat.
 
-## Installation
+## Usage
 
-- Fork the repository to your Github
-- Change the `broadcaster` variable in `app.js`
-- Commit and push your changes
-- Go to your Repository Settings, then the 'Pages' tab and activate the function for your branch (on the /root)
-
-**Your site is now published in your repository!**
+- Go to https://matthewbrandt.github.io/lurkreveal
+- Input your broadcaster username in the input field
+- Enjoy!
 
 ## Background
 
@@ -31,7 +28,7 @@ The streamer must accept that _all_ of these reasons are legitimate reasons! It'
 
 This is **not** a tool that is used for spying on Twitch users in your chat and calling them out for lurking. Twitch is fundamentally an open, caring community and appreciates that each person is unique in their own way.
 
-LurkReveal™️ tool is for streamers to see what users are in their chat for different reasons:
+LurkReveal&trade; tool is for streamers to see what users are in their chat for different reasons:
 
 - keep an eye out for other streamers who may be friends, potential incoming raids, etc.
 - monitor against potential hate raids or other hate events

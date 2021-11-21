@@ -1,4 +1,3 @@
-//const broadcaster = 'matty_twoshoes'
 const params = new URLSearchParams(window.location.search);
 const broadcaster = params.get("broadcaster");
 if(broadcaster){
@@ -22,7 +21,13 @@ if(broadcaster){
             }
         }).then(function (data) {
             document.getElementById('chatters').innerHTML = '';
-            document.querySelector('#count span').innerHTML = addCommas(data.chatter_count-1);
+
+            let viewerCount = data.chatter_count;
+
+            if (data.chatters.broadcaster.length > 0) {
+                viewerCount-1;
+            };
+            document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
             
             console.log(data.chatters);
             for (key in data.chatters) {
@@ -31,7 +36,7 @@ if(broadcaster){
                 if (data.chatters[userType].length > 0 && excludeUserTypes.indexOf(userType) == -1) {
                     if (userType !== 'viewers') {
                         let divItem = document.createElement("div");
-                        divItem.innerHTML = `<h3>${userType}</h3>`;
+                        divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
                         divItem.classList.add('row', userType);
                         let unorderedList = document.createElement("ul");
                         document.getElementById('chatters').append(divItem);
@@ -61,11 +66,16 @@ if(broadcaster){
                             'undefined_process'
                         ];
                         const knownBots = [
-                            'commanderroot'
+                            'commanderroot',
+                            'pantherbot',
+                            'streamlabs',
+                            'streamelements',
+                            'nightbot',
+                            'wizebot'
                         ];
                         
                         let divItem = document.createElement("div");
-                            divItem.innerHTML = `<h3>${userType}</h3>`;
+                            divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
                             divItem.classList.add('row', userType);
                             let unorderedList = document.createElement("ul");
                             document.getElementById('chatters').append(divItem);
@@ -96,7 +106,7 @@ if(broadcaster){
     
 }else{
     let divItem = document.createElement("div");
-    divItem.innerHTML = '<h3>Please add a Broadcaster to the url to view chatters</h3>';
+    divItem.innerHTML = '<h3>Please input your broadcaster name to view the users.</h3>';
     document.getElementById('chatters').append(divItem);
 }
 

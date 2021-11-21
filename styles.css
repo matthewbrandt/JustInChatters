@@ -61,14 +61,17 @@ input {
 	display: none;
 }
 
-#count {
-	font-size: 1rem;
-}
-#count span {
-	font-size: 1.3rem;
+#totalcount {
+	font-size: 2rem;
 	font-weight: 600;
-	color: var(--lilac);
+	color: var(--bermuda);
 }
+
+#chatters {
+	display: flex;
+	flex-direction: column;
+}
+
 #chatters .row ul {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -88,6 +91,10 @@ input {
 	aspect-ratio: 1000/100;
 }
 
+#chatters .moderators {
+	order: 1;
+}
+
 #chatters .moderators h3:before {
 	content: '';
 	display: inline-block;
@@ -102,6 +109,10 @@ input {
 #chatters .moderators ul li {
 	background-color: var(--lilac);
 	color: var(--midnightexpress);
+}
+
+#chatters .staff {
+	order: 2;
 }
 
 #chatters .staff h3:before {
@@ -120,6 +131,10 @@ input {
 	color: var(--midnightexpress);
 }
 
+#chatters .vips {
+	order: 3;
+}
+
 #chatters .vips h3:before {
 	content: '';
 	display: inline-block;
@@ -136,7 +151,11 @@ input {
 	color: var(--midnightexpress);
 }
 
-#chatters .viewers h2:before {
+#chatters .viewers {
+	order: 4;
+}
+
+#chatters .viewers h3:before {
 	content: '';
 	display: inline-block;
 	background: url('https://assets.help.twitch.tv/glitchwhite.png') no-repeat;
@@ -173,20 +192,20 @@ input {
 
 @keyframes loading {
 	0% {
-		background-color: #cd0a00;
+		background-color: var(--bermuda);
 	}
 	30% {
-		background-color: #fa8a00;
+		background-color: var(--saffron);
 	}
 	50% {
 		height: 100px;
 		margin-top: 0px;
 	}
 	80% {
-		background-color: #91d700;
+		background-color: var(--lilac);
 	}
 	100% {
-		background-color: #cd0a00;
+		background-color:var(--slateblue);
 	}
 }
 /*
