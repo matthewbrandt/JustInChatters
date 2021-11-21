@@ -1,15 +1,16 @@
 :root {
-    --athensgray: #EEF0F1;
-    --lilac: #EFCCFB;
-    --saffron: #F5BD32;
-    --bermuda: #82E4C6;
-    --slateblue: #755ACD;
-    --monsoon: #777777;
-    --midnightexpress: #182437;
-    --alpha: 0.7;
+	--athensgray: #eef0f1;
+	--lilac: #efccfb;
+	--saffron: #f5bd32;
+	--bermuda: #82e4c6;
+	--slateblue: #755acd;
+	--monsoon: #777777;
+	--midnightexpress: #182437;
+	--alpha: 0.7;
 }
 
-html, body {
+html,
+body {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -20,86 +21,340 @@ html, body {
 
 body {
 	line-height: 1;
-    background-color: var(--midnightexpress);
-    color: var(--athensgray);
-    font-family: Roboto, Ubuntu, 'Open Sans', sans-serif;
-    padding: 2.5rem;
-
+	background-color: var(--midnightexpress);
+	color: var(--athensgray);
+	font-family: Roboto, Ubuntu, 'Open Sans', sans-serif;
+	padding: 2.5rem;
 }
 
-ol, ul {
+ol,
+ul {
 	list-style: none;
 }
 
+.horizontal-space {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 2rem;
+}
+
+h2#broadcaster-name {
+	font-size: 4rem;
+	line-height: 0;
+}
+h3 {
+	font-size: 2.2rem;
+}
+label {
+	display: none;
+	margin-right: 1rem;
+}
+input {
+	font-size: 1rem;
+	padding: 0.5rem;
+	border-radius: 7px;
+}
+
+.hide {
+	display: none;
+}
+
+#count {
+	font-size: 1rem;
+}
+#count span {
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: var(--lilac);
+}
 #chatters .row ul {
-    display: grid;
-    grid-template-columns: repeat( auto-fill, minmax(150px, 1fr) );
-    gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 1rem;
+	padding-left: 0;
 }
 
 #chatters .row ul li {
-    padding: 1rem;
-    font-size: 14px;
-    border: 1px solid var(--athensgray);
-    background-color: var(--monsoon);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size-adjust: inherit;
-    aspect-ratio: 1000/100;
+	padding: 1rem;
+	font-size: 14px;
+	border: 1px solid var(--athensgray);
+	background-color: var(--monsoon);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size-adjust: inherit;
+	aspect-ratio: 1000/100;
 }
 
-#chatters .moderators h2:before {
-    content: "";
-    display: inline-block;
-    background: url("https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1") no-repeat;
-    background-size: 18px;
-    width: 18px;
-    height: 18px;
-    margin: 0 6px 0 0;
+#chatters .moderators h3:before {
+	content: '';
+	display: inline-block;
+	background: url('https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1')
+		no-repeat;
+	background-size: 18px;
+	width: 18px;
+	height: 18px;
+	margin: 0 6px 0 0;
 }
 
 #chatters .moderators ul li {
-    background-color: var(--lilac);
-    color: var(--midnightexpress);
+	background-color: var(--lilac);
+	color: var(--midnightexpress);
 }
 
-#chatters .staff h2:before {
-    content: "";
-    display: inline-block;
-    background: url("https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/1") no-repeat;
-    background-size: 18px;
-    width: 18px;
-    height: 18px;
-    margin: 0 6px 0 0;
+#chatters .staff h3:before {
+	content: '';
+	display: inline-block;
+	background: url('https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/1')
+		no-repeat;
+	background-size: 18px;
+	width: 18px;
+	height: 18px;
+	margin: 0 6px 0 0;
 }
 
 #chatters .staff ul li {
-    background-color: var(--bermuda);
-    color: var(--midnightexpress);
+	background-color: var(--bermuda);
+	color: var(--midnightexpress);
 }
 
-#chatters .vips h2:before {
-    content: "";
-    display: inline-block;
-    background: url("https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/2") no-repeat;
-    background-size: 18px;
-    width: 18px;
-    height: 18px;
-    margin: 0 6px 0 0;
+#chatters .vips h3:before {
+	content: '';
+	display: inline-block;
+	background: url('https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/2')
+		no-repeat;
+	background-size: 18px;
+	width: 18px;
+	height: 18px;
+	margin: 0 6px 0 0;
 }
 
 #chatters .vips ul li {
-    background-color: var(--saffron);
-    color: var(--midnightexpress);
+	background-color: var(--saffron);
+	color: var(--midnightexpress);
 }
 
 #chatters .viewers h2:before {
-    content: "";
-    display: inline-block;
-    background: url("https://assets.help.twitch.tv/glitchwhite.png") no-repeat;
-    background-size: 18px;
-    width: 18px;
-    height: 18px;
-    margin: 0 6px 0 0;
+	content: '';
+	display: inline-block;
+	background: url('https://assets.help.twitch.tv/glitchwhite.png') no-repeat;
+	background-size: 18px;
+	width: 18px;
+	height: 18px;
+	margin: 0 6px 0 0;
+}
+
+/* Loader styling */
+#loader-wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(51, 51, 51, 0.7);
+}
+#loader-wrapper.loader-hide {
+	display: none;
+}
+.loading {
+	height: 120px;
+	padding: 0px;
+	width: 160px;
+	border-left: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+@keyframes loading {
+	0% {
+		background-color: #cd0a00;
+	}
+	30% {
+		background-color: #fa8a00;
+	}
+	50% {
+		height: 100px;
+		margin-top: 0px;
+	}
+	80% {
+		background-color: #91d700;
+	}
+	100% {
+		background-color: #cd0a00;
+	}
+}
+/*
+@-moz-keyframes loading {
+	50% {
+		height: 100px;
+		margin-top: 0px;
+	}
+}
+@-o-keyframes loading {
+	50% {
+		height: 100px;
+		margin-top: 0px;
+	}
+}
+@keyframes loading {
+	50% {
+		height: 100px;
+		margin-top: 0px;
+	}
+}*/
+.loading .loading-1 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 0.25s;
+	animation-delay: 0.25s;
+}
+.loading .loading-2 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 0.5s;
+	animation-delay: 0.5s;
+}
+.loading .loading-3 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 0.75s;
+	animation-delay: 0.75s;
+}
+.loading .loading-4 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 1s;
+	animation-delay: 1s;
+}
+.loading .loading-5 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 1.25s;
+	animation-delay: 1.25s;
+}
+.loading .loading-6 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 1.5s;
+	animation-delay: 1.5s;
+}
+.loading .loading-7 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 1.75s;
+	animation-delay: 1.75s;
+}
+.loading .loading-8 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 2s;
+	animation-delay: 2s;
+}
+.loading .loading-9 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 2.25s;
+	animation-delay: 2.25s;
+}
+.loading .loading-10 {
+	height: 10px;
+	width: 30px;
+	background-color: #fff;
+	display: inline-block;
+	margin-top: 90px;
+	-webkit-animation: loading 2.5s infinite;
+	-moz-animation: loading 2.5s infinite;
+	-o-animation: loading 2.5s infinite;
+	animation: loading 2.5s infinite;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	-webkit-animation-delay: 2.5s;
+	animation-delay: 2.5s;
 }
