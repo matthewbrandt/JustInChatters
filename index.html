@@ -10,15 +10,7 @@
 	<body>
 		<header class="header">
 			<div>
-				<h1>LurkReveal&trade;: who is in your stream?</h1>
-				<div id="lastupdate" class="hide">Last Updated: <span><script>document.write(new Date().toLocaleTimeString());</script></span> (Local Time)</div>
-			</div>
-			<div class="horizontal-space">
-				<div>
-					<h2 id="broadcaster-name" class="hide"></h2>
-					<div id="totalcount" class="hide"><span></span> Users</div>
-				</div>
-				<div class="search hide">
+				<div class="user-search hide">
 					<label for="username">Search a username</label>
 					<input
 						type="text"
@@ -27,6 +19,14 @@
 						name="username"
 						onkeyup="filter_results()"
 					/>
+				</div>
+				<h1>LurkReveal&trade;: who is in your stream?</h1>
+				<div id="lastupdate" class="hide">This page will automatically update every 3 minutes | Last Updated: <span><script>document.write(new Date().toLocaleTimeString());</script></span> (Local Time)</div>
+			</div>
+			<div class="horizontal-space">
+				<div>
+					<h2 id="broadcaster-name" class="hide"></h2>
+					<div id="totalcount" class="hide"><span></span> Users</div>
 				</div>
 			</div>
 		</header>

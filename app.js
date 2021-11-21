@@ -6,7 +6,7 @@ if(broadcaster){
     getChatters(broadcaster);
 } else {
     let divItem = document.createElement("div");
-    divItem.innerHTML = '<h3>Please input your broadcaster name to view the users.</h3><div class="search broadcaster-search-wrapper"><label for="broadcaster">Enter broadcaster username</label><input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/><button id="broadcaster-button" class="button">Go</button></div>';
+    divItem.innerHTML = '<h3>Please input your broadcaster name to view the users in the channel.</h3><div class="search broadcaster-search-wrapper"><label for="broadcaster">Enter broadcaster username</label><input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/><button id="broadcaster-button" class="button">Go</button></div>';
     document.getElementById('chatters').append(divItem);
 
     document.getElementById("broadcaster-button").addEventListener("click", function() {
@@ -14,7 +14,6 @@ if(broadcaster){
         const url = new URL(window.location);
         url.searchParams.set('broadcaster', broadcasterInput);
         window.history.pushState({}, '', url);
-      
         getChatters(broadcasterInput);
     }); 
 }
@@ -58,6 +57,49 @@ function addCommas(nStr) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
+}
+
+function botCheck(user) {
+    // preliminary list
+    const knownBots = [
+        'commanderroot',
+        'pantherbot',
+        'streamlabs',
+        'streamelements',
+        'nightbot',
+        'wizebot',
+        'buttsbot',
+        'anotherttvviewer'
+    ];
+
+    if (knownBots.indexOf(user)){
+        return true
+    } else {
+        return false;
+    }
+}
+
+function friendCheck(user) {
+    // preliminary list
+    const digitalFriend = [
+        'codebymistakes',
+        'fredda_the_cat',
+        'gowithhim',
+        'groversaurus',
+        'jeffs_hat_stand',
+        'kaxips06',
+        'lurkydev',
+        'theclipographer',
+        'therealsurlybot',
+        'theunoriginaljerk',
+        'undefined_process'
+    ];
+
+    if (digitalFriend.indexOf(user)){
+        return true
+    } else {
+        return false;
+    }
 }
 
 function getChatters(broadcaster) {
@@ -121,7 +163,7 @@ function getChatters(broadcaster) {
         };
         loaderWrapper.classList.add('loader-hide');
     }).catch(function (err) {
-        console.warn('Something went wrong! ', err);
+        console.warn('Something went wrong!', err);
     });
 
     setTimeout(function() {
@@ -129,46 +171,4 @@ function getChatters(broadcaster) {
         getChatters(broadcaster);
 
     }, 180000); // every 3 mins
-}
-
-function botCheck(user) {
-    // preliminary list
-    const knownBots = [
-        'commanderroot',
-        'pantherbot',
-        'streamlabs',
-        'streamelements',
-        'nightbot',
-        'wizebot',
-        'buttsbot'
-    ];
-
-    if (knownBots.indexOf(user)){
-        return true
-    } else {
-        return false;
-    }
-}
-
-function friendCheck(user) {
-    // preliminary list
-    const digitalFriend = [
-        'codebymistakes',
-        'fredda_the_cat',
-        'gowithhim',
-        'groversaurus',
-        'jeffs_hat_stand',
-        'kaxips06',
-        'lurkydev',
-        'theclipographer',
-        'therealsurlybot',
-        'theunoriginaljerk',
-        'undefined_process'
-    ];
-
-    if (digitalFriend.indexOf(user)){
-        return true
-    } else {
-        return false;
-    }
 }
