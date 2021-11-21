@@ -2,12 +2,80 @@ const params = new URLSearchParams(window.location.search);
 const broadcaster = params.get("broadcaster");
 const loaderWrapper = document.getElementById('loader-wrapper');
 
+if(broadcaster){
+    const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster}`
+    const loaderWrapper = document.getElementById('loader-wrapper')
+    const broadcasterName = document.getElementById('broadcaster-name');
+    broadcasterName.textContent=broadcaster;
+
+    [].forEach.call(document.querySelectorAll('.hide'), function (el) {
+        el.classList.remove('hide');
+    });
+
+    function getChatters() {
+        loaderWrapper.classList.remove('loader-hide');
+        fetch(url).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                return Promise.reject(response);
+            }
+        }).then(function (data) {
+            document.getElementById('chatters').innerHTML = '';
+
+            const updatedTime = date.now();
+            const viewerCount = data.chatter_count;
+
+            if (data.chatters.broadcaster.length > 0) {
+                viewerCount-1;
+            };
+            document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
+            document.querySelector('#lastupdated span').innerHTML = updatedTime;
+            console.log(data.chatters);
+            for (key in data.chatters) {
+                const userType = key;
+                const excludeUserTypes = ['admins','broadcaster','global_mods'];
+                if (data.chatters[userType].length > 0 && excludeUserTypes.indexOf(userType) == -1) {
+                    if (userType !== 'viewers') {
+                        let divItem = document.createElement("div");
+                        divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
+                        divItem.classList.add('row', userType);
+                        let unorderedList = document.createElement("ul");
+                        document.getElementById('chatters').append(divItem);
+                        divItem.append(unorderedList);
+                        for (let i = 0; i < data.chatters[userType].length; i++) {
+                            let listItem = document.createElement("li");
+                            let user = data.chatters[userType][i];
+                            listItem.textContent = user;
+                            unorderedList.appendChild(listItem);   
+                        }                        
+                    }
+                    else {
+                        let divItem = document.createElement("div");
+                            divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
+                            divItem.classList.add('row', userType);
+                            let unorderedList = document.createElement("ul");
+                            document.getElementById('chatters').append(divItem);
+                            divItem.append(unorderedList);
+                            for (let i = 0; i < data.chatters[userType].length; i++) {
+                                let listItem = document.createElement("li");
+                                let user = data.chatters[userType][i];
+                                listItem.textContent = user;
+                                unorderedList.appendChild(listItem);   
+                            }
+                    }
+                }
+            };
+            loaderWrapper.classList.add('loader-hide');
+        }).catch(function (err) {
+            console.warn('Something went wrong! ', err);
+        });
+    }
+}
 
 if(broadcaster){
-
     getChatters(broadcaster);
-    
-}else{
+} else {
     let divItem = document.createElement("div");
     divItem.innerHTML = '<h3>Please input your broadcaster name to view the users.</h3><div class="search broadcaster-search-wrapper"><label for="broadcaster">Enter broadcaster username</label><input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/><button id="broadcaster-button" class="button">Go</button></div>';
     document.getElementById('chatters').append(divItem);
@@ -28,6 +96,7 @@ function filter_results(){
     inputValue = input.value;
     chatters = document.getElementById("chatters");
     li = chatters.getElementsByTagName("li");
+
     if(inputValue != 0){
         for (i = 0; i < li.length; i++) {
             //console.log(li[i]);
@@ -42,7 +111,7 @@ function filter_results(){
             }
             
         }
-    }else{
+    } else {
         for (i = 0; i < li.length; i++) {
             let element = li[i];
             element.style.display = "";
@@ -110,30 +179,7 @@ function getChatters(broadcaster) {
                     
                     
                 }
-                else {
-                    // preliminary list
-                    const digitalFriend = [
-                        'codebymistakes',
-                        'fredda_the_cat',
-                        'gowithhim',
-                        'groversaurus',
-                        'jeffs_hat_stand',
-                        'kaxips06',
-                        'lurkydev',
-                        'theclipographer',
-                        'therealsurlybot',
-                        'theunoriginaljerk',
-                        'undefined_process'
-                    ];
-                    const knownBots = [
-                        'commanderroot',
-                        'pantherbot',
-                        'streamlabs',
-                        'streamelements',
-                        'nightbot',
-                        'wizebot'
-                    ];
-                    
+                else {       
                     let divItem = document.createElement("div");
                         divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
                         divItem.classList.add('row', userType);
@@ -159,4 +205,46 @@ function getChatters(broadcaster) {
         getChatters(broadcaster);
 
     }, 180000); // every 3 mins
+}
+
+function botCheck(user) {
+    // preliminary list
+    const knownBots = [
+        'commanderroot',
+        'pantherbot',
+        'streamlabs',
+        'streamelements',
+        'nightbot',
+        'wizebot',
+        'buttsbot'
+    ];
+
+    if (knownBots.indexOf(user)){
+        return true
+    } else {
+        return false;
+    }
+}
+
+function friendCheck(user) {
+    // preliminary list
+    const digitalFriend = [
+        'codebymistakes',
+        'fredda_the_cat',
+        'gowithhim',
+        'groversaurus',
+        'jeffs_hat_stand',
+        'kaxips06',
+        'lurkydev',
+        'theclipographer',
+        'therealsurlybot',
+        'theunoriginaljerk',
+        'undefined_process'
+    ];
+
+    if (digitalFriend.indexOf(user)){
+        return true
+    } else {
+        return false;
+    }
 }

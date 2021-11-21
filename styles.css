@@ -36,6 +36,11 @@ a {
 	text-decoration: none;
 }
 
+#lastupdate  {
+	color: var(--monsoon);
+	font-style: italic;
+}
+
 .horizontal-space {
 	display: flex;
 	justify-content: space-between;

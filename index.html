@@ -11,17 +11,18 @@
 		<header class="header">
 			<div>
 				<h1>LurkReveal&trade;: who is in your stream?</h1>
+				<div id="lastupdate" class="hide">Last Updated: <span></span></div>
 			</div>
 			<div class="horizontal-space">
 				<div>
 					<h2 id="broadcaster-name" class="hide"></h2>
-					<div id="totalcount" class="hide"><span> </span> Users</div>
+					<div id="totalcount" class="hide"><span></span> Users</div>
 				</div>
 				<div class="search hide">
 					<label for="username">Search a username</label>
 					<input
 						type="text"
-						placeholder="Search a username"
+						placeholder="Search for user"
 						id="username"
 						name="username"
 						onkeyup="filter_results()"
