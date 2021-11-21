@@ -32,6 +32,10 @@ ul {
 	list-style: none;
 }
 
+a {
+	text-decoration: none;
+}
+
 .horizontal-space {
 	display: flex;
 	justify-content: space-between;
@@ -110,6 +114,9 @@ input {
 	background-color: var(--lilac);
 	color: var(--midnightexpress);
 }
+#chatters .moderators ul li a {
+	color: var(--midnightexpress);
+}
 
 #chatters .staff {
 	order: 2;
@@ -128,6 +135,9 @@ input {
 
 #chatters .staff ul li {
 	background-color: var(--bermuda);
+	color: var(--midnightexpress);
+}
+#chatters .staff ul li a {
 	color: var(--midnightexpress);
 }
 
@@ -150,6 +160,9 @@ input {
 	background-color: var(--saffron);
 	color: var(--midnightexpress);
 }
+#chatters .vips ul li a {
+	color: var(--midnightexpress);
+}
 
 #chatters .viewers {
 	order: 4;
@@ -163,6 +176,30 @@ input {
 	width: 18px;
 	height: 18px;
 	margin: 0 6px 0 0;
+}
+#chatters .viewers a {
+	color: var(--athensgray);
+}
+.broadcaster-search-wrapper {
+	display: flex;
+}
+.broadcaster-search {
+	margin-right: 1rem;
+	padding: 1rem;
+	font-size: 1.5rem;
+}
+
+.button {
+	border-style: none;
+	padding: 0 2rem;
+	background: var(--lilac);
+	border-radius: 7px;
+	align-items: center;
+	transition: all 0.5s;
+}
+.button:hover {
+	background: var(--bermuda);
+	cursor: pointer;
 }
 
 /* Loader styling */
@@ -205,7 +242,7 @@ input {
 		background-color: var(--lilac);
 	}
 	100% {
-		background-color:var(--slateblue);
+		background-color: var(--slateblue);
 	}
 }
 /*
