@@ -1,0 +1,34 @@
+:root {
+    --athensgray: #EEF0F1;
+    --lilac: #EFCCFB;
+    --saffron: #F5BD32;
+    --bermuda: #82E4C6;
+    --slateblue: #755ACD;
+    --monsoon: #777777;
+    --midnightexpress: #182437;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	line-height: 1;
+    background-color: var(--midnightexpress);
+    color: var(--athensgray);
+    font-family: Roboto, Ubuntu, 'Open Sans', sans-serif;
+
+}
+
+ol, ul {
+	list-style: none;
+}
+
+.rows {
+
+}
