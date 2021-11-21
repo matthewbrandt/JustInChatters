@@ -49,9 +49,44 @@ ol, ul {
     aspect-ratio: 1000/100;
 }
 
+#chatters .moderators h2:before {
+    content: "";
+    display: inline-block;
+    background: url("https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1") no-repeat;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 0;
+}
+
 #chatters .moderators ul li {
     background-color: var(--lilac);
     color: var(--midnightexpress);
+}
+
+#chatters .staff h2:before {
+    content: "";
+    display: inline-block;
+    background: url("https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/1") no-repeat;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 0;
+}
+
+#chatters .staff ul li {
+    background-color: var(--bermuda);
+    color: var(--midnightexpress);
+}
+
+#chatters .vips h2:before {
+    content: "";
+    display: inline-block;
+    background: url("https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/2") no-repeat;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 0;
 }
 
 #chatters .vips ul li {
@@ -59,7 +94,12 @@ ol, ul {
     color: var(--midnightexpress);
 }
 
-#chatters .staff ul li {
-    background-color: var(--bermuda);
-    color: var(--midnightexpress);
+#chatters .viewers h2:before {
+    content: "";
+    display: inline-block;
+    background: url("https://assets.help.twitch.tv/glitchwhite.png") no-repeat;
+    background-size: 18px;
+    width: 18px;
+    height: 18px;
+    margin: 0 6px 0 0;
 }
