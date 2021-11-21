@@ -3,77 +3,6 @@ const broadcaster = params.get("broadcaster");
 const loaderWrapper = document.getElementById('loader-wrapper');
 
 if(broadcaster){
-    const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster}`
-    const loaderWrapper = document.getElementById('loader-wrapper')
-    const broadcasterName = document.getElementById('broadcaster-name');
-    broadcasterName.textContent=broadcaster;
-
-    [].forEach.call(document.querySelectorAll('.hide'), function (el) {
-        el.classList.remove('hide');
-    });
-
-    function getChatters() {
-        loaderWrapper.classList.remove('loader-hide');
-        fetch(url).then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return Promise.reject(response);
-            }
-        }).then(function (data) {
-            document.getElementById('chatters').innerHTML = '';
-
-            const updatedTime = date.now();
-            const viewerCount = data.chatter_count;
-
-            if (data.chatters.broadcaster.length > 0) {
-                viewerCount-1;
-            };
-            document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
-            document.querySelector('#lastupdated span').innerHTML = updatedTime;
-            console.log(data.chatters);
-            for (key in data.chatters) {
-                const userType = key;
-                const excludeUserTypes = ['admins','broadcaster','global_mods'];
-                if (data.chatters[userType].length > 0 && excludeUserTypes.indexOf(userType) == -1) {
-                    if (userType !== 'viewers') {
-                        let divItem = document.createElement("div");
-                        divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
-                        divItem.classList.add('row', userType);
-                        let unorderedList = document.createElement("ul");
-                        document.getElementById('chatters').append(divItem);
-                        divItem.append(unorderedList);
-                        for (let i = 0; i < data.chatters[userType].length; i++) {
-                            let listItem = document.createElement("li");
-                            let user = data.chatters[userType][i];
-                            listItem.textContent = user;
-                            unorderedList.appendChild(listItem);   
-                        }                        
-                    }
-                    else {
-                        let divItem = document.createElement("div");
-                            divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
-                            divItem.classList.add('row', userType);
-                            let unorderedList = document.createElement("ul");
-                            document.getElementById('chatters').append(divItem);
-                            divItem.append(unorderedList);
-                            for (let i = 0; i < data.chatters[userType].length; i++) {
-                                let listItem = document.createElement("li");
-                                let user = data.chatters[userType][i];
-                                listItem.textContent = user;
-                                unorderedList.appendChild(listItem);   
-                            }
-                    }
-                }
-            };
-            loaderWrapper.classList.add('loader-hide');
-        }).catch(function (err) {
-            console.warn('Something went wrong! ', err);
-        });
-    }
-}
-
-if(broadcaster){
     getChatters(broadcaster);
 } else {
     let divItem = document.createElement("div");
@@ -150,14 +79,11 @@ function getChatters(broadcaster) {
         }
     }).then(function (data) {
         document.getElementById('chatters').innerHTML = '';
-
-        let viewerCount = data.chatter_count;
-
+        const viewerCount = data.chatter_count;
         if (data.chatters.broadcaster.length > 0) {
             viewerCount-1;
         };
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
-        
         console.log(data.chatters);
         for (key in data.chatters) {
             const userType = key;
@@ -173,11 +99,9 @@ function getChatters(broadcaster) {
                     for (let i = 0; i < data.chatters[userType].length; i++) {
                         let listItem = document.createElement("li");
                         let user = data.chatters[userType][i];
-                        listItem.innerHTML = `<a href="https://twitch.tv/${user}">${user}</a>`;
+                        listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
                         unorderedList.appendChild(listItem);   
                     }
-                    
-                    
                 }
                 else {       
                     let divItem = document.createElement("div");
@@ -189,7 +113,7 @@ function getChatters(broadcaster) {
                         for (let i = 0; i < data.chatters[userType].length; i++) {
                             let listItem = document.createElement("li");
                             let user = data.chatters[userType][i];
-                            listItem.innerHTML = `<a href="https://twitch.tv/${user}">${user}</a>`;
+                            listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
                             unorderedList.appendChild(listItem);   
                         }
                 }
