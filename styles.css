@@ -6,6 +6,7 @@
     --slateblue: #755ACD;
     --monsoon: #777777;
     --midnightexpress: #182437;
+    --alpha: 0.7;
 }
 
 html, body {
@@ -22,6 +23,7 @@ body {
     background-color: var(--midnightexpress);
     color: var(--athensgray);
     font-family: Roboto, Ubuntu, 'Open Sans', sans-serif;
+    padding: 2.5rem;
 
 }
 
@@ -29,6 +31,35 @@ ol, ul {
 	list-style: none;
 }
 
-.rows {
+#chatters .row ul {
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax(150px, 1fr) );
+    gap: 1rem;
+}
 
+#chatters .row ul li {
+    padding: 1rem;
+    font-size: 14px;
+    border: 1px solid var(--athensgray);
+    background-color: var(--monsoon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size-adjust: inherit;
+    aspect-ratio: 1000/100;
+}
+
+#chatters .moderators ul li {
+    background-color: var(--lilac);
+    color: var(--midnightexpress);
+}
+
+#chatters .vips ul li {
+    background-color: var(--saffron);
+    color: var(--midnightexpress);
+}
+
+#chatters .staff ul li {
+    background-color: var(--bermuda);
+    color: var(--midnightexpress);
 }

@@ -14,13 +14,14 @@ fetch(url).then(function (response) {
         const excludeUserTypes = ['admins','broadcaster','global_mods'];
         if (data.chatters[userType].length > 0 && excludeUserTypes.indexOf(userType) == -1) {
             if (userType !== 'viewers') {
+                let divItem = document.createElement("div");
+                divItem.innerHTML = `<h2>${userType}</h2>`;
+                divItem.classList.add('row', userType);
                 let unorderedList = document.createElement("ul");
-                unorderedList.classList.add('row', userType);
-                unorderedList.innerHTML = `<h2>${userType}</h2>`;
-                document.getElementById('chatters').append(unorderedList);
+                document.getElementById('chatters').append(divItem);
+                divItem.append(unorderedList);
                 for (let i = 0; i < data.chatters[userType].length; i++) {
                     let listItem = document.createElement("li");
-                    listItem.className = 'tile';
                     let user = data.chatters[userType][i];
                     listItem.textContent = user;
                     unorderedList.appendChild(listItem);   
@@ -29,20 +30,22 @@ fetch(url).then(function (response) {
                 
             }
             else {
+                // add bots later
                 const friendlyBots = [];
                 const knownBots = [];
                 
-                let unorderedList = document.createElement("ul");
-                unorderedList.classList.add('row', userType);
-                unorderedList.innerHTML = `<h2>${userType}</h2>`;
-                document.getElementById('chatters').append(unorderedList);
-                for (let i = 0; i < data.chatters[userType].length; i++) {
-                    let listItem = document.createElement("li");
-                    listItem.className = 'tile';
-                    let user = data.chatters[userType][i];
-                    listItem.textContent = user;
-                    unorderedList.appendChild(listItem);   
-                }
+                let divItem = document.createElement("div");
+                    divItem.innerHTML = `<h2>${userType}</h2>`;
+                    divItem.classList.add('row', userType);
+                    let unorderedList = document.createElement("ul");
+                    document.getElementById('chatters').append(divItem);
+                    divItem.append(unorderedList);
+                    for (let i = 0; i < data.chatters[userType].length; i++) {
+                        let listItem = document.createElement("li");
+                        let user = data.chatters[userType][i];
+                        listItem.textContent = user;
+                        unorderedList.appendChild(listItem);   
+                    }
             }
         }
     };
