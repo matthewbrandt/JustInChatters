@@ -45,7 +45,7 @@ h2#broadcaster-name {
 	line-height: 0;
 }
 h3 {
-	font-size: 2.5rem;
+	font-size: 2.2rem;
 }
 label {
 	display: none;
@@ -88,7 +88,7 @@ input {
 	aspect-ratio: 1000/100;
 }
 
-#chatters .moderators h2:before {
+#chatters .moderators h3:before {
 	content: '';
 	display: inline-block;
 	background: url('https://static-cdn.jtvnw.net/badges/v1/3267646d-33f0-4b17-b3df-f923a41db1d0/1')
@@ -104,7 +104,7 @@ input {
 	color: var(--midnightexpress);
 }
 
-#chatters .staff h2:before {
+#chatters .staff h3:before {
 	content: '';
 	display: inline-block;
 	background: url('https://static-cdn.jtvnw.net/badges/v1/d97c37bd-a6f5-4c38-8f57-4e4bef88af34/1')
@@ -120,7 +120,7 @@ input {
 	color: var(--midnightexpress);
 }
 
-#chatters .vips h2:before {
+#chatters .vips h3:before {
 	content: '';
 	display: inline-block;
 	background: url('https://static-cdn.jtvnw.net/badges/v1/b817aba4-fad8-49e2-b88a-7cc744dfa6ec/2')

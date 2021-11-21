@@ -46,9 +46,23 @@ if(broadcaster){
                         
                     }
                     else {
-                        // add bots later
-                        const friendlyBots = [];
-                        const knownBots = [];
+                        // preliminary list
+                        const digitalFriend = [
+                            'codebymistakes',
+                            'fredda_the_cat',
+                            'gowithhim',
+                            'groversaurus',
+                            'jeffs_hat_stand',
+                            'kaxips06',
+                            'lurkydev',
+                            'theclipographer',
+                            'therealsurlybot',
+                            'theunoriginaljerk',
+                            'undefined_process'
+                        ];
+                        const knownBots = [
+                            'commanderroot'
+                        ];
                         
                         let divItem = document.createElement("div");
                             divItem.innerHTML = `<h3>${userType}</h3>`;
@@ -67,20 +81,16 @@ if(broadcaster){
             };
             loaderWrapper.classList.add('loader-hide');
         }).catch(function (err) {
-            // there was an error
             console.warn('Something went wrong! ', err);
         });
 
         setTimeout(function() {
 
-        // again
         getChatters();
 
-        // every 3 mins
-        }, 180000);
+        }, 180000); // every 3 mins
     }
 
-    // Begins
     getChatters();
 
     
