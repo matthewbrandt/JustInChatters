@@ -8,8 +8,36 @@
 		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
-		<h1>lurkeReveal™️: who is in your stream?</h1>
-		<div id="chatters">
+		<header class="header">
+			<div>
+				<h1>lurkeReveal&trade;: who is in your stream?</h1>
+			</div>
+			<div class="horizontal-space">
+				<div>
+					<h2 id="broadcaster-name" class="hide"></h2>
+					<div id="count" class="hide">Viewers = <span></span></div>
+				</div>
+				<div class="search hide">
+					<label for="username">Search a username</label>
+					<input
+						type="text"
+						placeholder="Search a username"
+						id="username"
+						name="username"
+						onkeyup="filter_results()"
+					/>
+				</div>
+			</div>
+		</header>
+		<h2 id="broadcaster-name"></h2>
+		<div id="chatters"></div>
+		<div id="loader-wrapper" class="loader-hide">
+			<div id="loading" class="loading">
+				<div class="loading-1"></div>
+				<div class="loading-2"></div>
+				<div class="loading-3"></div>
+				<div class="loading-4"></div>
+			</div>
 		</div>
 		<script src="app.js"></script>
 	</body>
