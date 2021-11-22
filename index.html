@@ -10,22 +10,23 @@
 	<body>
 		<header class="header">
 			<div>
-				<h1>LurkReveal&trade;: who is in your stream?</h1>
-			</div>
-			<div class="horizontal-space">
-				<div>
-					<h2 id="broadcaster-name" class="hide"></h2>
-					<div id="totalcount" class="hide"><span> </span> Users</div>
-				</div>
-				<div class="search hide">
+				<div class="user-search hide">
 					<label for="username">Search a username</label>
 					<input
 						type="text"
-						placeholder="Search a username"
+						placeholder="Search for user"
 						id="username"
 						name="username"
 						onkeyup="filter_results()"
 					/>
+				</div>
+				<h1>LurkReveal&trade;: who is in your stream?</h1>
+				<div id="lastupdate" class="hide">This page will automatically update every 3 minutes | Last Updated: <span><script>document.write(new Date().toLocaleTimeString());</script></span> (Local Time)</div>
+			</div>
+			<div class="horizontal-space">
+				<div>
+					<h2 id="broadcaster-name" class="hide"></h2>
+					<div id="totalcount" class="hide"><span></span> Users</div>
 				</div>
 			</div>
 		</header>
@@ -39,6 +40,17 @@
 				<div class="loading-4"></div>
 			</div>
 		</div>
+		<div class="divider divider-top hide"></div>
+		<div id="example" class="hide"><p class="hide">Each tile represents one (1) user and some have additional styling:</p>
+			<div class="row hide">
+				<ul class="hide">
+					<li class="bot-user hide">known bot</li>
+					<li class="digitalfriend-user hide">digital friend</li>
+					<li class="clawteam-user hide">claw team member</li>
+				</ul>
+			</div>
+		</div>
+		<div class="divider divider-bottom hide"></div>
 		<script src="app.js"></script>
 	</body>
 </html>

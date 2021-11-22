@@ -6,6 +6,9 @@
 	--slateblue: #755acd;
 	--monsoon: #777777;
 	--midnightexpress: #182437;
+	--rosewood: #660013;
+	--rockblue: #9FB2C9;
+	--ruddy: #F20025;
 	--alpha: 0.7;
 }
 
@@ -36,6 +39,20 @@ a {
 	text-decoration: none;
 }
 
+h3 {
+	font-size: 1.5rem;
+}
+
+label {
+	display: none;
+	margin-right: 1rem;
+}
+input {
+	font-size: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 10px;
+}
+
 .horizontal-space {
 	display: flex;
 	justify-content: space-between;
@@ -44,25 +61,55 @@ a {
 	gap: 2rem;
 }
 
+.hide {
+	display: none;
+}
+
+#lastupdate  {
+	color: var(--monsoon);
+	font-style: italic;
+}
+
 h2#broadcaster-name {
 	font-size: 4rem;
 	line-height: 0;
 }
-h3 {
-	font-size: 2.2rem;
-}
-label {
-	display: none;
-	margin-right: 1rem;
-}
-input {
-	font-size: 1rem;
-	padding: 0.5rem;
-	border-radius: 7px;
+
+.user-search {
+	float: right;
 }
 
-.hide {
-	display: none;
+.user-search input {
+	width: 150px;
+	font-size: 1rem;
+}
+
+.broadcaster-search {
+	margin-right: 0.5rem;
+	padding: 1rem;
+	font-size: 1rem;
+	float: left;
+	width: 350px;
+}
+
+.broadcaster-search-wrapper {
+	display: flex;
+	float: left;
+}
+
+.button {
+	border-style: none;
+	padding: 0 2rem;
+	background: var(--saffron);
+	border-radius: 7px;
+	align-items: center;
+	transition: all 0.5s;
+	font-size: 1rem;
+}
+
+.button:hover {
+	background: var(--athensgray);
+	cursor: pointer;
 }
 
 #totalcount {
@@ -70,6 +117,60 @@ input {
 	font-weight: 600;
 	color: var(--bermuda);
 }
+
+.divider {
+	min-width: 900px;
+	max-width: 100%;
+   	height: 1px;
+   	background-color: var(--monsoon);
+}
+
+.divider-top {
+   	margin: 125px 0 0 0;
+}
+
+#example {
+	display: flex;
+	flex-direction: column;
+	font-style: italic;
+}
+
+#example .row ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 1rem;
+	padding-left: 0;
+}
+
+#example .row ul li {
+	padding: 1rem;
+	font-size: 14px;
+	border: 1px solid var(--athensgray);
+	background-color: var(--monsoon);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size-adjust: inherit;
+	aspect-ratio: 1000/100;
+}
+
+#example .bot-user {
+	background-color: var(--slateblue) !important;
+	color: var(--athensgray) !important;
+	border: none !important;
+  }
+
+#example .digitalfriend-user {
+	background-color: var(--rockblue) !important;
+	color: var(--midnightexpress) !important;
+	border: none !important;
+  }
+
+#example .clawteam-user {
+	background-color: var(--ruddy) !important;
+	color: var(--athensgray) !important;
+	border: none !important;
+  }
 
 #chatters {
 	display: flex;
@@ -86,13 +187,36 @@ input {
 #chatters .row ul li {
 	padding: 1rem;
 	font-size: 14px;
-	border: 1px solid var(--athensgray);
 	background-color: var(--monsoon);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size-adjust: inherit;
 	aspect-ratio: 1000/100;
+}
+
+#chatters .bot-user {
+	background-color: var(--slateblue) !important;
+  }
+
+#chatters .bot-user a {
+	color: var(--athensgray) !important;	
+}
+
+#chatters .digitalfriend-user {
+	background-color: var(--rockblue) !important;
+  }
+
+#chatters .digitalfriend-user a {
+	color: var(--midnightexpress) !important;	
+}
+
+#chatters .clawteam-user {
+	background-color: var(--ruddy) !important;
+  }
+
+#chatters .clawteam-user a {
+	color: var(--athensgray) !important;	
 }
 
 #chatters .moderators {
@@ -114,6 +238,7 @@ input {
 	background-color: var(--lilac);
 	color: var(--midnightexpress);
 }
+
 #chatters .moderators ul li a {
 	color: var(--midnightexpress);
 }
@@ -137,6 +262,7 @@ input {
 	background-color: var(--bermuda);
 	color: var(--midnightexpress);
 }
+
 #chatters .staff ul li a {
 	color: var(--midnightexpress);
 }
@@ -177,32 +303,12 @@ input {
 	height: 18px;
 	margin: 0 6px 0 0;
 }
+
 #chatters .viewers a {
 	color: var(--athensgray);
 }
-.broadcaster-search-wrapper {
-	display: flex;
-}
-.broadcaster-search {
-	margin-right: 1rem;
-	padding: 1rem;
-	font-size: 1.5rem;
-}
 
-.button {
-	border-style: none;
-	padding: 0 2rem;
-	background: var(--lilac);
-	border-radius: 7px;
-	align-items: center;
-	transition: all 0.5s;
-}
-.button:hover {
-	background: var(--bermuda);
-	cursor: pointer;
-}
-
-/* Loader styling */
+/* loader styling */
 #loader-wrapper {
 	position: absolute;
 	top: 0;
@@ -214,9 +320,11 @@ input {
 	align-items: center;
 	background-color: rgba(51, 51, 51, 0.7);
 }
+
 #loader-wrapper.loader-hide {
 	display: none;
 }
+
 .loading {
 	height: 120px;
 	padding: 0px;
@@ -245,25 +353,7 @@ input {
 		background-color: var(--slateblue);
 	}
 }
-/*
-@-moz-keyframes loading {
-	50% {
-		height: 100px;
-		margin-top: 0px;
-	}
-}
-@-o-keyframes loading {
-	50% {
-		height: 100px;
-		margin-top: 0px;
-	}
-}
-@keyframes loading {
-	50% {
-		height: 100px;
-		margin-top: 0px;
-	}
-}*/
+
 .loading .loading-1 {
 	height: 10px;
 	width: 30px;
@@ -279,6 +369,7 @@ input {
 	-webkit-animation-delay: 0.25s;
 	animation-delay: 0.25s;
 }
+
 .loading .loading-2 {
 	height: 10px;
 	width: 30px;
@@ -294,6 +385,7 @@ input {
 	-webkit-animation-delay: 0.5s;
 	animation-delay: 0.5s;
 }
+
 .loading .loading-3 {
 	height: 10px;
 	width: 30px;
@@ -309,6 +401,7 @@ input {
 	-webkit-animation-delay: 0.75s;
 	animation-delay: 0.75s;
 }
+
 .loading .loading-4 {
 	height: 10px;
 	width: 30px;
@@ -324,6 +417,7 @@ input {
 	-webkit-animation-delay: 1s;
 	animation-delay: 1s;
 }
+
 .loading .loading-5 {
 	height: 10px;
 	width: 30px;
@@ -339,6 +433,7 @@ input {
 	-webkit-animation-delay: 1.25s;
 	animation-delay: 1.25s;
 }
+
 .loading .loading-6 {
 	height: 10px;
 	width: 30px;
@@ -354,6 +449,7 @@ input {
 	-webkit-animation-delay: 1.5s;
 	animation-delay: 1.5s;
 }
+
 .loading .loading-7 {
 	height: 10px;
 	width: 30px;
@@ -369,6 +465,7 @@ input {
 	-webkit-animation-delay: 1.75s;
 	animation-delay: 1.75s;
 }
+
 .loading .loading-8 {
 	height: 10px;
 	width: 30px;
@@ -384,6 +481,7 @@ input {
 	-webkit-animation-delay: 2s;
 	animation-delay: 2s;
 }
+
 .loading .loading-9 {
 	height: 10px;
 	width: 30px;
@@ -399,6 +497,7 @@ input {
 	-webkit-animation-delay: 2.25s;
 	animation-delay: 2.25s;
 }
+
 .loading .loading-10 {
 	height: 10px;
 	width: 30px;

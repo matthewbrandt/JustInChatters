@@ -2,14 +2,11 @@ const params = new URLSearchParams(window.location.search);
 const broadcaster = params.get("broadcaster");
 const loaderWrapper = document.getElementById('loader-wrapper');
 
-
 if(broadcaster){
-
     getChatters(broadcaster);
-    
-}else{
+} else {
     let divItem = document.createElement("div");
-    divItem.innerHTML = '<h3>Please input your broadcaster name to view the users.</h3><div class="search broadcaster-search-wrapper"><label for="broadcaster">Enter broadcaster username</label><input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/><button id="broadcaster-button" class="button">Go</button></div>';
+    divItem.innerHTML = '<h3>Please input your broadcaster name to view the users in the channel.</h3><div class="search broadcaster-search-wrapper"><label for="broadcaster">Enter broadcaster username</label><input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/><button id="broadcaster-button" class="button">Go</button></div>';
     document.getElementById('chatters').append(divItem);
 
     document.getElementById("broadcaster-button").addEventListener("click", function() {
@@ -17,7 +14,6 @@ if(broadcaster){
         const url = new URL(window.location);
         url.searchParams.set('broadcaster', broadcasterInput);
         window.history.pushState({}, '', url);
-      
         getChatters(broadcasterInput);
     }); 
 }
@@ -28,6 +24,7 @@ function filter_results(){
     inputValue = input.value;
     chatters = document.getElementById("chatters");
     li = chatters.getElementsByTagName("li");
+
     if(inputValue != 0){
         for (i = 0; i < li.length; i++) {
             //console.log(li[i]);
@@ -42,7 +39,7 @@ function filter_results(){
             }
             
         }
-    }else{
+    } else {
         for (i = 0; i < li.length; i++) {
             let element = li[i];
             element.style.display = "";
@@ -60,6 +57,80 @@ function addCommas(nStr) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
+}
+
+function botCheck(user) {
+    // preliminary list
+    const knownBots = [
+        'commanderroot',
+        'p4nth3rb0t',
+        'streamlabs',
+        'streamelements',
+        'nightbot',
+        'wizebot',
+        'buttsbot',
+        'anotherttvviewer',
+        'kaxips06',
+        'soundalerts',
+        'sixflagsmagicmountain'
+    ];
+
+    if (knownBots.indexOf(user) > 0){
+        return true
+    } else {
+        return false;
+    }
+}
+
+function friendCheck(user) {
+    // preliminary list
+    const digitalFriend = [
+        'codebymistakes',
+        'fredda_the_cat',
+        'gowithhim',
+        'groversaurus',
+        'jeffs_hat_stand',
+        'lurkydev',
+        'theclipographer',
+        'therealsurlybot',
+        'theunoriginaljerk',
+        'undefined_process'
+    ];
+
+    if (digitalFriend.indexOf(user) > 0){
+        return true
+    } else {
+        return false;
+    }
+}
+
+function clawTeamCheck(user) {
+    // preliminary list
+    const teamMembers = [
+        'whitep4nth3r',
+        'theempressaria',
+        'metalandcoffee_',
+        'ladyofcode',
+        'thatn00b__',
+        'matty_twoshoes',
+        'lucecarter',
+        'toefrog',
+        'jwalter',
+        'haliphax',
+        'tdrayson',
+        'gacbl',
+        'ukmadlz',
+        'dr_dinomight',
+        'sociablesteve',
+        'finitesingularity',
+        'canhorn'
+    ];
+
+    if (teamMembers.indexOf(user) > 0){
+        return true
+    } else {
+        return false;
+    }
 }
 
 function getChatters(broadcaster) {
@@ -81,77 +152,45 @@ function getChatters(broadcaster) {
         }
     }).then(function (data) {
         document.getElementById('chatters').innerHTML = '';
-
-        let viewerCount = data.chatter_count;
-
+        const viewerCount = data.chatter_count;
         if (data.chatters.broadcaster.length > 0) {
             viewerCount-1;
         };
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
-        
-        console.log(data.chatters);
         for (key in data.chatters) {
             const userType = key;
             const excludeUserTypes = ['admins','broadcaster','global_mods'];
-            if (data.chatters[userType].length > 0 && excludeUserTypes.indexOf(userType) == -1) {
-                if (userType !== 'viewers') {
+            const userList = data.chatters[userType];
+            if (userList.length > 0 && excludeUserTypes.indexOf(userType) == -1) {
+                if (userType !== '') {
+
                     let divItem = document.createElement("div");
-                    divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
+                    divItem.innerHTML = `<h3>${userType} (${addCommas(userList.length)})</h3>`;
                     divItem.classList.add('row', userType);
                     let unorderedList = document.createElement("ul");
                     document.getElementById('chatters').append(divItem);
                     divItem.append(unorderedList);
-                    for (let i = 0; i < data.chatters[userType].length; i++) {
+                    for (let i = 0; i < userList.length; i++) {
                         let listItem = document.createElement("li");
-                        let user = data.chatters[userType][i];
-                        listItem.innerHTML = `<a href="https://twitch.tv/${user}">${user}</a>`;
-                        unorderedList.appendChild(listItem);   
-                    }
-                    
-                    
-                }
-                else {
-                    // preliminary list
-                    const digitalFriend = [
-                        'codebymistakes',
-                        'fredda_the_cat',
-                        'gowithhim',
-                        'groversaurus',
-                        'jeffs_hat_stand',
-                        'kaxips06',
-                        'lurkydev',
-                        'theclipographer',
-                        'therealsurlybot',
-                        'theunoriginaljerk',
-                        'undefined_process'
-                    ];
-                    const knownBots = [
-                        'commanderroot',
-                        'pantherbot',
-                        'streamlabs',
-                        'streamelements',
-                        'nightbot',
-                        'wizebot'
-                    ];
-                    
-                    let divItem = document.createElement("div");
-                        divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
-                        divItem.classList.add('row', userType);
-                        let unorderedList = document.createElement("ul");
-                        document.getElementById('chatters').append(divItem);
-                        divItem.append(unorderedList);
-                        for (let i = 0; i < data.chatters[userType].length; i++) {
-                            let listItem = document.createElement("li");
-                            let user = data.chatters[userType][i];
-                            listItem.innerHTML = `<a href="https://twitch.tv/${user}">${user}</a>`;
-                            unorderedList.appendChild(listItem);   
+                        let user = userList[i];
+                        listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
+                        unorderedList.appendChild(listItem); 
+                        if (botCheck(userList[i])) {
+                            listItem.classList.add("bot-user");
                         }
+                        if (friendCheck(userList[i])) {
+                            listItem.classList.add("digitalfriend-user");
+                        }
+                        if (clawTeamCheck(userList[i])) {
+                            listItem.classList.add("clawteam-user");
+                        }
+                    }
                 }
             }
         };
         loaderWrapper.classList.add('loader-hide');
     }).catch(function (err) {
-        console.warn('Something went wrong! ', err);
+        console.warn('Something went wrong!', err);
     });
 
     setTimeout(function() {
