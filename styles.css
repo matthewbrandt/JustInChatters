@@ -9,6 +9,7 @@
 	--rosewood: #660013;
 	--rockblue: #9FB2C9;
 	--ruddy: #F20025;
+	--somegrey: #212121:
 	--alpha: 0.7;
 }
 
@@ -125,14 +126,11 @@ h2#broadcaster-name {
    	background-color: var(--monsoon);
 }
 
-.divider-top {
-   	margin: 125px 0 0 0;
-}
-
 #example {
 	display: flex;
 	flex-direction: column;
 	font-style: italic;
+	color: var(--midnightexpress);
 }
 
 #example .row ul {
@@ -175,6 +173,7 @@ h2#broadcaster-name {
 #chatters {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: 225px;
 }
 
 #chatters .row ul {
@@ -306,6 +305,15 @@ h2#broadcaster-name {
 
 #chatters .viewers a {
 	color: var(--athensgray);
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	background-color: var(--saffron);
+	padding: 0 2.5rem;
+    left: 0;
+    right: 0;
 }
 
 /* loader styling */
