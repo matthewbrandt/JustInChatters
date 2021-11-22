@@ -21,7 +21,7 @@ if(broadcaster){
 function filter_results(){
     var input, chatters, table, li, i, txtValue;
     input = document.getElementById("username");
-    inputValue = input.value;
+    inputValue = input.value.toLowerCase();
     chatters = document.getElementById("chatters");
     li = chatters.getElementsByTagName("li");
 
@@ -134,7 +134,7 @@ function clawTeamCheck(user) {
 }
 
 function getChatters(broadcaster) {
-    const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster}`
+    const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster.toLowerCase()}`
     const broadcasterName = document.getElementById('broadcaster-name');
     broadcasterName.textContent=broadcaster;
 
