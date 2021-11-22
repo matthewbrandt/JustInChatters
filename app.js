@@ -63,16 +63,19 @@ function botCheck(user) {
     // preliminary list
     const knownBots = [
         'commanderroot',
-        'pantherbot',
+        'p4nth3rb0t',
         'streamlabs',
         'streamelements',
         'nightbot',
         'wizebot',
         'buttsbot',
-        'anotherttvviewer'
+        'anotherttvviewer',
+        'kaxips06',
+        'soundalerts',
+        'sixflagsmagicmountain'
     ];
 
-    if (knownBots.indexOf(user)){
+    if (knownBots.indexOf(user) > 0){
         return true
     } else {
         return false;
@@ -87,7 +90,6 @@ function friendCheck(user) {
         'gowithhim',
         'groversaurus',
         'jeffs_hat_stand',
-        'kaxips06',
         'lurkydev',
         'theclipographer',
         'therealsurlybot',
@@ -95,7 +97,36 @@ function friendCheck(user) {
         'undefined_process'
     ];
 
-    if (digitalFriend.indexOf(user)){
+    if (digitalFriend.indexOf(user) > 0){
+        return true
+    } else {
+        return false;
+    }
+}
+
+function clawTeamCheck(user) {
+    // preliminary list
+    const teamMembers = [
+        'whitep4nth3r',
+        'theempressaria',
+        'metalandcoffee_',
+        'ladyofcode',
+        'thatn00b__',
+        'matty_twoshoes',
+        'lucecarter',
+        'toefrog',
+        'jwalter',
+        'haliphax',
+        'tdrayson',
+        'gacbl',
+        'ukmadlz',
+        'dr_dinomight',
+        'sociablesteve',
+        'finitesingularity',
+        'canhorn'
+    ];
+
+    if (teamMembers.indexOf(user) > 0){
         return true
     } else {
         return false;
@@ -126,38 +157,34 @@ function getChatters(broadcaster) {
             viewerCount-1;
         };
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
-        console.log(data.chatters);
         for (key in data.chatters) {
             const userType = key;
             const excludeUserTypes = ['admins','broadcaster','global_mods'];
-            if (data.chatters[userType].length > 0 && excludeUserTypes.indexOf(userType) == -1) {
-                if (userType !== 'viewers') {
+            const userList = data.chatters[userType];
+            if (userList.length > 0 && excludeUserTypes.indexOf(userType) == -1) {
+                if (userType !== '') {
+
                     let divItem = document.createElement("div");
-                    divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
+                    divItem.innerHTML = `<h3>${userType} (${addCommas(userList.length)})</h3>`;
                     divItem.classList.add('row', userType);
                     let unorderedList = document.createElement("ul");
                     document.getElementById('chatters').append(divItem);
                     divItem.append(unorderedList);
-                    for (let i = 0; i < data.chatters[userType].length; i++) {
+                    for (let i = 0; i < userList.length; i++) {
                         let listItem = document.createElement("li");
-                        let user = data.chatters[userType][i];
+                        let user = userList[i];
                         listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
-                        unorderedList.appendChild(listItem);   
-                    }
-                }
-                else {       
-                    let divItem = document.createElement("div");
-                        divItem.innerHTML = `<h3>${userType} (${addCommas(data.chatters[userType].length)})</h3>`;
-                        divItem.classList.add('row', userType);
-                        let unorderedList = document.createElement("ul");
-                        document.getElementById('chatters').append(divItem);
-                        divItem.append(unorderedList);
-                        for (let i = 0; i < data.chatters[userType].length; i++) {
-                            let listItem = document.createElement("li");
-                            let user = data.chatters[userType][i];
-                            listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
-                            unorderedList.appendChild(listItem);   
+                        unorderedList.appendChild(listItem); 
+                        if (botCheck(userList[i])) {
+                            listItem.classList.add("bot-user");
                         }
+                        if (friendCheck(userList[i])) {
+                            listItem.classList.add("digitalfriend-user");
+                        }
+                        if (clawTeamCheck(userList[i])) {
+                            listItem.classList.add("clawteam-user");
+                        }
+                    }
                 }
             }
         };
