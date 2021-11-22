@@ -72,36 +72,26 @@ function botCheck(user) {
         'anotherttvviewer',
         'kaxips06',
         'soundalerts',
-        'sixflagsmagicmountain'
+        'sixflagsmagicmountain',
+        'quirkapp'
     ];
-
-    if (knownBots.indexOf(user) > 0){
-        return true
-    } else {
-        return false;
-    }
+    return knownBots.includes(user);
 }
 
 function friendCheck(user) {
     // preliminary list
     const digitalFriend = [
-        'codebymistakes',
         'fredda_the_cat',
-        'gowithhim',
         'groversaurus',
-        'jeffs_hat_stand',
+        'coppersbeard',
+        'codebymistakes',
+        'theunoriginaljerk',
+        'undefined_process',
         'lurkydev',
         'theclipographer',
-        'therealsurlybot',
-        'theunoriginaljerk',
-        'undefined_process'
+        'jeffs_hat_stand'
     ];
-
-    if (digitalFriend.indexOf(user) > 0){
-        return true
-    } else {
-        return false;
-    }
+    return digitalFriend.includes(user);
 }
 
 function clawTeamCheck(user) {
@@ -125,18 +115,13 @@ function clawTeamCheck(user) {
         'finitesingularity',
         'canhorn'
     ];
-
-    if (teamMembers.indexOf(user) > 0){
-        return true
-    } else {
-        return false;
-    }
+    return teamMembers.includes(user);
 }
 
 function getChatters(broadcaster) {
     const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster.toLowerCase()}`
     const broadcasterName = document.getElementById('broadcaster-name');
-    broadcasterName.textContent=broadcaster;
+    broadcasterName.textContent=broadcaster.toLowerCase();
 
     [].forEach.call(document.querySelectorAll('.hide'), function (el) {
         el.classList.remove('hide');
