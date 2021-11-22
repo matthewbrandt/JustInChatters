@@ -71,6 +71,18 @@ input {
 	font-style: italic;
 }
 
+.broadcaster {
+	display:flex;
+	align-items: top;
+}
+
+.reset-icon {
+	height: 25px;
+    margin: 25px 0 0 5px;
+	cursor: pointer;
+	color: var(--lilac);
+}
+
 h2#broadcaster-name {
 	font-size: 4rem;
 	line-height: 0;
@@ -119,18 +131,14 @@ h2#broadcaster-name {
 	color: var(--bermuda);
 }
 
-.divider {
-	min-width: 900px;
-	max-width: 100%;
-   	height: 1px;
-   	background-color: var(--monsoon);
+.header {
+	margin-bottom: 40px;
 }
 
 #example {
 	display: flex;
 	flex-direction: column;
 	font-style: italic;
-	color: var(--midnightexpress);
 }
 
 #example .row ul {
@@ -310,10 +318,11 @@ h2#broadcaster-name {
 .footer {
 	position: fixed;
 	bottom: 0;
-	background-color: var(--saffron);
+	background-color: var(--midnightexpress);
 	padding: 0 2.5rem;
     left: 0;
     right: 0;
+	border-top: 3px solid var(--athensgray);
 }
 
 /* loader styling */

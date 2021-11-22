@@ -5,17 +5,44 @@ const loaderWrapper = document.getElementById('loader-wrapper');
 if(broadcaster){
     getChatters(broadcaster);
 } else {
-    let divItem = document.createElement("div");
-    divItem.innerHTML = '<h3>Please input your broadcaster name to view the users in the channel.</h3><div class="search broadcaster-search-wrapper"><label for="broadcaster">Enter broadcaster username</label><input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/><button id="broadcaster-button" class="button">Go</button></div>';
-    document.getElementById('chatters').append(divItem);
+    loadBroadcaster()
+}
 
-    document.getElementById("broadcaster-button").addEventListener("click", function() {
-        broadcasterInput = document.getElementById('broadcaster').value;
-        const url = new URL(window.location);
-        url.searchParams.set('broadcaster', broadcasterInput);
-        window.history.pushState({}, '', url);
-        getChatters(broadcasterInput);
-    }); 
+// empty parameter
+// enter text in field
+// go => loads
+
+// streamer filled
+// click SVG
+// remove all content => OK
+// display form field
+// click go => loads
+
+
+function clickHandler() {
+    broadcasterInput = document.getElementById('broadcaster').value;
+    const url = new URL(window.location);
+    url.searchParams.set('broadcaster', broadcasterInput);
+    window.history.pushState({}, '', url);
+    getChatters(broadcasterInput);
+}
+
+function loadBroadcaster() {
+    let divItem = document.createElement("div");
+    divItem.innerHTML = `<h3>Please input your broadcaster name to view the users in the channel.</h3>
+        <div class="search broadcaster-search-wrapper">
+        <label for="broadcaster">Enter broadcaster username</label>
+        <input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/>
+        <button id="broadcaster-button" class="button" onclick="clickHandler()">Go</button>
+        </div>`;
+    document.getElementById('chatters').append(divItem);
+ 
+}
+
+function resetButton() {
+    document.getElementById('subheader').innerHTML = '';
+    document.getElementById('chatters').innerHTML = '';
+    loadBroadcaster();
 }
 
 function filter_results(){
