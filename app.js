@@ -11,6 +11,7 @@ if(broadcaster){
     setBroadcasterLS(broadcaster);
 } else if(username) {
     getChatters(username);
+    urlUpdate(username);
 }else{
     loadBroadcaster();
 }
@@ -31,13 +32,17 @@ if(JSON.parse(footerState) === true ){
 
 function clickHandler() {
     broadcasterInput = document.getElementById('broadcaster').value;
-    const url = new URL(window.location);
-    url.searchParams.set('broadcaster', broadcasterInput);
-    window.history.pushState({}, '', url);
+    urlUpdate(broadcasterInput);
     getChatters(broadcasterInput);
     setBroadcasterLS(broadcasterInput);
     footer = document.getElementById('footer');
     footer.style.display = 'block';
+}
+
+function urlUpdate(broadcaster) {
+    const url = new URL(window.location);
+    url.searchParams.set('broadcaster', broadcaster);
+    window.history.pushState({}, '', url);
 }
 
 function loadBroadcaster() {
