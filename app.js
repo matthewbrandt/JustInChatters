@@ -2,9 +2,16 @@ const params = new URLSearchParams(window.location.search);
 const broadcaster = params.get("broadcaster");
 const loaderWrapper = document.getElementById('loader-wrapper');
 
+async function preLoadBotList () {
+    console.log("file loaded");
+    const botList = './bot_list.txt';
+    const response = await fetch(botList);
+    return await response.text();
+}
+const loadedBotListPromise = preLoadBotList();
+
 let username = localStorage.getItem('username');
 let footerState = localStorage.getItem('footer');
-console.log(footerState);
 
 if(broadcaster){
     getChatters(broadcaster);
@@ -18,17 +25,6 @@ if(broadcaster){
 if(JSON.parse(footerState) === true ){
     hideFooter();
 }
-
-// empty parameter
-// enter text in field
-// go => loads
-
-// streamer filled
-// click SVG
-// remove all content => OK
-// display form field
-// click go => loads
-
 
 function clickHandler() {
     broadcasterInput = document.getElementById('broadcaster').value;
@@ -123,23 +119,53 @@ function addCommas(nStr) {
     return x1 + x2;
 }
 
-function botCheck(user) {
-    // preliminary list
+function botCheck(user,botList) {
+    // read huge bot list from local file
+    // source: https://github.com/thatvoidcat/twitch_insights_bot_names
+
     const knownBots = [
-        'commanderroot',
-        'p4nth3rb0t',
-        'streamlabs',
-        'streamelements',
-        'nightbot',
-        'wizebot',
+        'amazeful',
+        'amazefulbot',
         'buttsbot',
-        'anotherttvviewer',
-        'kaxips06',
-        'soundalerts',
+        'commanderroot',
+        'creatisbot',
+        'dinu',
+        'fossabot',
+        'lattemotte',
+        'logviewer',
+        'mirrobot',
+        'moobot',
+        'nightbot',
+        'overrustlelogs',
+        'own3d',
+        'p4nth3rb0t',
+        'pretzelrocks',
+        'quirkapp',
+        'rainmaker',
         'sixflagsmagicmountain',
-        'quirkapp'
+        'socialblade',
+        'soundalerts',
+        'streamcaptainbot',
+        'streamdeckerbot',
+        'streamelements',
+        'streamjar',
+        'streamkit',
+        'streamlabs',
+        'tipeeebot',
+        'vivbot',
+        'wizebot',
+        'wizebot'
     ];
-    return knownBots.includes(user);
+
+    // first check the "known" botlist
+    if (knownBots.includes(user)) {
+        return knownBots.includes(user);
+    }
+    // then check the full file of bots
+    else if (botList.includes(user)) {
+        return user;
+    }
+
 }
 
 function friendCheck(user) {
@@ -193,19 +219,20 @@ function getChatters(broadcaster) {
 
     loaderWrapper.classList.remove('loader-hide');
 
-    fetch(url).then(function (response) {
+    fetch(url).then(async function (response) {
         if (response.ok) {
-            return response.json();
+            return await response.json();
         } else {
             return Promise.reject(response);
         }
-    }).then(function (data) {
+    }).then(async function (data) {
         document.getElementById('chatters').innerHTML = '';
         const viewerCount = data.chatter_count;
         if (data.chatters.broadcaster.length > 0) {
             viewerCount-1;
         };
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
+        const botList = await loadedBotListPromise;
         for (key in data.chatters) {
             const userType = key;
             const excludeUserTypes = ['admins','broadcaster','global_mods'];
@@ -224,7 +251,7 @@ function getChatters(broadcaster) {
                         let user = userList[i];
                         listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
                         unorderedList.appendChild(listItem); 
-                        if (botCheck(userList[i])) {
+                        if (botCheck(userList[i],botList)) {
                             listItem.classList.add("bot-user");
                         }
                         if (friendCheck(userList[i])) {
