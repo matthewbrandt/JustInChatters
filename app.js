@@ -226,8 +226,8 @@ function getChatters(broadcaster) {
             }
           }
         if (response.ok) {
-            // return await response.json();
-            return testData;
+            return await response.json();
+            //return testData;
         } else {
             return Promise.reject(response);
         }
