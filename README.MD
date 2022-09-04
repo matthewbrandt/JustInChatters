@@ -2,7 +2,7 @@
 
 ## Summary
 
-LurkReveal&trade; is a tool that you can run in Github Pages to look at what users are in your Twitch chat.
+LurkReveal&trade; is a tool that you can open as a website to get a visual representation of what users are in your Twitch chat.
 
 ## Usage
 
@@ -10,7 +10,16 @@ LurkReveal&trade; is a tool that you can run in Github Pages to look at what use
 - Input your broadcaster username in the input field
 - Enjoy!
 
-## Background
+## Categories & Colours
+Each category has it's own colour, appropriately using the colours from the Twitch UI. If there are no chatters in that category in your stream, the category is hidden (e.g. "Staff").
+
+### Known Bots
+Bots are classified as such by multiple different websites in different ways. In general, it can be said that bots connect to multiple (10+) different chats via IRC directly and are therefore not watching your stream. If a bot is known for providing a particular service, see below.
+
+### Digital Service
+Some bots are connected to your chat because they provide a service like stream analyticy, or you even may have invited them there. If you have a bot that is misclassified, please reach out!
+
+## More Information
 
 The word `lurker` is commonly used within the Twitch community to loosely describe users that are hanging out in your channel, but are not speaking in chat.
 
