@@ -123,89 +123,67 @@ function botCheck(user,botList) {
     // read huge bot list from local file
     // source: https://github.com/thatvoidcat/twitch_insights_bot_names
 
-    const knownBots = [
+    //  check the full file for bots
+    if (botList.includes(user)) {
+        return user;
+    }
+
+}
+
+function serviceCheck(user) {
+    // preliminary list, will be added to later
+    const serviceBot = [
+        '9kmmrbot',
         'amazeful',
         'amazefulbot',
         'buttsbot',
         'commanderroot',
         'creatisbot',
         'dinu',
+        'dr3ddbot',
         'fossabot',
+        'kikettebot',
         'lattemotte',
+        'logiceftbot',
         'logviewer',
+        'lolrankbot',
+        'mikuia',
         'mirrobot',
         'moobot',
+        'mtgbot',
         'nightbot',
         'overrustlelogs',
         'own3d',
         'p4nth3rb0t',
+        'playwithviewersbot',
+        'pokemoncommunitygame',
         'pretzelrocks',
         'quirkapp',
         'rainmaker',
+        'restreambot',
+        'sery_bot',
         'sixflagsmagicmountain',
         'socialblade',
+        'songlistbot',
         'soundalerts',
+        'sport_scores_bot',
+        'ssakdook',
+        'streambee_bot',
         'streamcaptainbot',
         'streamdeckerbot',
         'streamelements',
+        'streamholics',
         'streamjar',
         'streamkit',
         'streamlabs',
+        'streamstickers',
         'tipeeebot',
         'vivbot',
+        'vtuberplus',
         'wizebot',
-        'wizebot'
+        'wzbot'
     ];
-
-    // first check the "known" botlist
-    if (knownBots.includes(user)) {
-        return knownBots.includes(user);
-    }
-    // then check the full file of bots
-    else if (botList.includes(user)) {
-        return user;
-    }
-
-}
-
-function friendCheck(user) {
-    // preliminary list
-    const digitalFriend = [
-        'fredda_the_cat',
-        'groversaurus',
-        'coppersbeard',
-        'codebymistakes',
-        'theunoriginaljerk',
-        'undefined_process',
-        'lurkydev',
-        'theclipographer',
-        'jeffs_hat_stand'
-    ];
-    return digitalFriend.includes(user);
-}
-
-function clawTeamCheck(user) {
-    // preliminary list
-    const teamMembers = [
-        'whitep4nth3r',
-        'theempressaria',
-        'metalandcoffee_',
-        'ladyofcode',
-        'thatn00b__',
-        'matty_twoshoes',
-        'lucecarter',
-        'toefrog',
-        'jwalter',
-        'haliphax',
-        'tdrayson',
-        'gacbl',
-        'ukmadlz',
-        'dr_dinomight',
-        'sociablesteve',
-        'finitesingularity',
-        'canhorn'
-    ];
-    return teamMembers.includes(user);
+    return serviceBot.includes(user);
 }
 
 function getChatters(broadcaster) {
@@ -220,8 +198,36 @@ function getChatters(broadcaster) {
     loaderWrapper.classList.remove('loader-hide');
 
     fetch(url).then(async function (response) {
+        let testData = {
+            "_links": {},
+            "chatter_count": 7,
+            "chatters": {
+              "admins": [],
+              "broadcaster": [],
+              "global_mods": [],
+              "moderators": [
+                "streamelements",
+                "finitesingularity"
+              ],
+              "staff": [
+                "zachbussey"
+              ],
+              "viewers": [
+                "anna_banana_10",
+                "commanderroot",
+                "creatisbot",
+                "sophiafox21",
+                "streambee_bot",
+                "tinarif"
+              ],
+              "vips": [
+                "fancyperson"
+              ]
+            }
+          }
         if (response.ok) {
-            return await response.json();
+            // return await response.json();
+            return testData;
         } else {
             return Promise.reject(response);
         }
@@ -251,15 +257,13 @@ function getChatters(broadcaster) {
                         let user = userList[i];
                         listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
                         unorderedList.appendChild(listItem); 
+                        if (serviceCheck(userList[i])) {
+                            listItem.classList.add("service-user");
+                        }
                         if (botCheck(userList[i],botList)) {
                             listItem.classList.add("bot-user");
                         }
-                        if (friendCheck(userList[i])) {
-                            listItem.classList.add("digitalfriend-user");
-                        }
-                        if (clawTeamCheck(userList[i])) {
-                            listItem.classList.add("clawteam-user");
-                        }
+                        
                     }
                 }
             }

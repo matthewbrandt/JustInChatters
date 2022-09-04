@@ -6,10 +6,11 @@
 	--slateblue: #755acd;
 	--monsoon: #777777;
 	--midnightexpress: #182437;
-	--rosewood: #660013;
 	--rockblue: #9FB2C9;
-	--ruddy: #F20025;
-	--somegrey: #212121:
+	--somegrey: #212121;
+	--darkpastelgreen: #00B020;
+	--fashionfuchsia: #E200B7;
+	--black: #000;
 	--alpha: 0.7;
 }
 
@@ -194,15 +195,9 @@ h2#broadcaster-name {
 	border: none !important;
   }
 
-#example .digitalfriend-user {
+#example .service-user {
 	background-color: var(--rockblue) !important;
 	color: var(--midnightexpress) !important;
-	border: none !important;
-  }
-
-#example .clawteam-user {
-	background-color: var(--ruddy) !important;
-	color: var(--athensgray) !important;
 	border: none !important;
   }
 
@@ -238,20 +233,12 @@ h2#broadcaster-name {
 	color: var(--athensgray) !important;	
 }
 
-#chatters .digitalfriend-user {
+#chatters .service-user {
 	background-color: var(--rockblue) !important;
   }
 
-#chatters .digitalfriend-user a {
+#chatters .service-user a {
 	color: var(--midnightexpress) !important;	
-}
-
-#chatters .clawteam-user {
-	background-color: var(--ruddy) !important;
-  }
-
-#chatters .clawteam-user a {
-	color: var(--athensgray) !important;	
 }
 
 #chatters .moderators {
@@ -270,12 +257,12 @@ h2#broadcaster-name {
 }
 
 #chatters .moderators ul li {
-	background-color: var(--lilac);
-	color: var(--midnightexpress);
+	background-color: var(--darkpastelgreen);
+	color: var(--athensgray);
 }
 
 #chatters .moderators ul li a {
-	color: var(--midnightexpress);
+	color: var(--athensgray);
 }
 
 #chatters .staff {
@@ -294,12 +281,12 @@ h2#broadcaster-name {
 }
 
 #chatters .staff ul li {
-	background-color: var(--bermuda);
-	color: var(--midnightexpress);
+	background-color: var(--black);
+	color: var(--athensgray);
 }
 
 #chatters .staff ul li a {
-	color: var(--midnightexpress);
+	color: var(--athensgray);
 }
 
 #chatters .vips {
@@ -318,11 +305,11 @@ h2#broadcaster-name {
 }
 
 #chatters .vips ul li {
-	background-color: var(--saffron);
-	color: var(--midnightexpress);
+	background-color: var(--fashionfuchsia);
+	color: var(--athensgray);
 }
 #chatters .vips ul li a {
-	color: var(--midnightexpress);
+	color: var(--athensgray);
 }
 
 #chatters .viewers {
@@ -377,7 +364,8 @@ h2#broadcaster-name {
 	align-items: center;
 	cursor:pointer;
 	padding:.5rem;
-	background-color: var(--slateblue);
+	background-color: var(--saffron);
+	color: var(--midnightexpress);
 }
 .footer--hide__text{
 	margin-right:0.5rem;
