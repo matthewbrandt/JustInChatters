@@ -14,7 +14,7 @@ LurkReveal&trade; is a tool that you can open as a website to get a visual repre
 Each category has it's own colour, appropriately using the colours from the Twitch UI. If there are no chatters in that category in your stream, the category is hidden (e.g. "Staff").
 
 ### Known Bots
-Bots are classified as such by multiple different websites in different ways. In general, it can be said that bots connect to multiple (10+) different chats via IRC directly and are therefore not watching your stream. If a bot is known for providing a particular service, see below.
+Bots are classified as such by multiple different websites in different ways. In general, it can be said that bots connect to multiple (10+) different chats via IRC directly and are therefore not watching your stream. There are currently `204'307` bots in the list here! If a bot is known for providing a particular service, see below.
 
 ### Digital Service
 Some bots are connected to your chat because they provide a service like stream analyticy, or you even may have invited them there. If you have a bot that is misclassified, please reach out!
