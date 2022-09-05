@@ -56,6 +56,25 @@ input {
 	border-radius: 10px;
 }
 
+.pulse {
+	background-color: var(--midnightexpress);
+	animation-name: color;
+	animation-duration: 0.5s;
+	animation-iteration-count: 3;
+  }
+  
+  @keyframes color {
+	0% {
+	  background-color: var(--midnightexpress);
+	}
+	50% {
+	  background-color: var(--saffron);
+	}
+	100 {
+	  background-color: var(--midnightexpress);
+	}
+  }
+
 .horizontal-space {
 	display: flex;
 	justify-content: space-between;
@@ -68,7 +87,7 @@ input {
 	display: none;
 }
 
-#lastupdate  {
+#lastupdate, #modless  {
 	color: var(--monsoon);
 	font-style: italic;
 	width:100%;
