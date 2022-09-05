@@ -206,8 +206,8 @@ function getChatters(broadcaster) {
               "broadcaster": [],
               "global_mods": [],
               "moderators": [
-                "streamelements",
-                "finitesingularity"
+                "streamelements"
+                
               ],
               "staff": [
                 "zachbussey"
@@ -268,6 +268,24 @@ function getChatters(broadcaster) {
                 }
             }
         };
+        // trigger modpulse here
+        let modCount = document.querySelectorAll('.moderators li:not(.service-user,.bot-user)').length;
+        let prevModCountLS = localStorage.getItem('previousModCount');
+        // if previous is empty set it
+        if (prevModCountLS == undefined) {
+            localStorage.setItem('previousModCount', modCount);
+        }
+        
+        // if currentModValue = 0 and previous modvalue > 0 then modpulse
+
+        if (modCount == 0 && prevModCountLS > 0) {
+            document.body.classList.add('pulse');   
+            //window.alert("All mods have left the building!")         
+        }
+        
+        // overwrite previous value with current value
+        localStorage.setItem('previousModCount', modCount);
+        
         loaderWrapper.classList.add('loader-hide');
     }).catch(function (err) {
         console.warn('Something went wrong!', err);
