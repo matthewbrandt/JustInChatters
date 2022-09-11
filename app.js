@@ -186,6 +186,14 @@ function serviceCheck(user) {
     return serviceBot.includes(user);
 }
 
+function customUserCheck(user) {
+    // read list from localstorage
+    const customUser = [
+        'bestvieweroftwitch'
+    ];
+    return customUser.includes(user);
+}
+
 function getChatters(broadcaster) {
     const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster.toLowerCase()}`
     const broadcasterName = document.getElementById('broadcaster-name');
@@ -207,27 +215,32 @@ function getChatters(broadcaster) {
               "global_mods": [],
               "moderators": [
                 "streamelements",
-                "finitesingularity"
+                "finitesingularity",
+                "mattythreeshoes"
               ],
               "staff": [
-                "zachbussey"
+                "zachbussey",
+                "slashie101"
               ],
               "viewers": [
                 "anna_banana_10",
+                "bestvieweroftwitch",
                 "commanderroot",
                 "creatisbot",
                 "sophiafox21",
                 "streambee_bot",
-                "tinarif"
+                "tinarif",
+                "standardvieweroftwitch"
               ],
               "vips": [
-                "fancyperson"
+                "fancyperson",
+                "timeenjoyed"
               ]
             }
           }
         if (response.ok) {
-            return await response.json();
-            //return testData;
+            //return await response.json();
+            return testData;
         } else {
             return Promise.reject(response);
         }
@@ -257,10 +270,13 @@ function getChatters(broadcaster) {
                         let user = userList[i];
                         listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
                         unorderedList.appendChild(listItem); 
-                        if (serviceCheck(userList[i])) {
+                        if (customUserCheck(userList[i])) {
+                            listItem.classList.add("custom-user");
+                        }
+                        else if (serviceCheck(userList[i])) {
                             listItem.classList.add("service-user");
                         }
-                        if (botCheck(userList[i],botList)) {
+                        else if (botCheck(userList[i],botList)) {
                             listItem.classList.add("bot-user");
                         }
                         
