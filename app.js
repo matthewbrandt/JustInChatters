@@ -188,9 +188,13 @@ function serviceCheck(user) {
 
 function customUserCheck(user) {
     // read list from localstorage
-    const customUser = [
-        'bestvieweroftwitch'
-    ];
+    let customUser = [];
+    
+    if (localStorage.getItem('userlist')) {
+        customUser = localStorage.getItem('userlist');
+        
+    }
+
     return customUser.includes(user);
 }
 
@@ -216,7 +220,8 @@ function getChatters(broadcaster) {
               "moderators": [
                 "streamelements",
                 "finitesingularity",
-                "mattythreeshoes"
+                "mattythreeshoes",
+                "dramaman"
               ],
               "staff": [
                 "zachbussey",
@@ -224,6 +229,7 @@ function getChatters(broadcaster) {
               ],
               "viewers": [
                 "anna_banana_10",
+                "affewfw6235325",
                 "bestvieweroftwitch",
                 "commanderroot",
                 "creatisbot",
