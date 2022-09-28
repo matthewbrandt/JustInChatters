@@ -66,10 +66,24 @@
 					Each tile represents one (1) user and some have additional styling:
 				</p>
 				<div class="row hide">
-					<ul class="hide">
-						<li class="bot-user hide">known bot</li>
-						<li class="service-user hide">digital service</li>
-					</ul>
+					<div>
+						<ul class="hide">
+							<li class="bot-user hide">known bot</li>
+							<li class="service-user hide">digital service</li>
+							<li class="custom-user hide">highlighted* user</li>
+						</ul>
+					</div>
+					<div class="hide highlight-info userlist">
+						<p>*You can add highlighted users by entering their Twitch username(s) into the field below and then click anywhere on the page. You can enter multiple usernames as comma-separated values (e.g. user1,user2). The highlight overrides all other styles.</p>
+						<label for="userlist">user1,user2</label>
+						<input
+							type="text"
+							placeholder="user1,user2"
+							id="userlist"
+							name="userlist"
+						    onblur="apply_userlist()"
+						/>
+					</div>
 				</div>
 				<div class="footer--hide" onClick="hideFooter()">
 					<span id="footer--hide__text" class="footer--hide__text">Show Key</span>

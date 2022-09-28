@@ -3,7 +3,6 @@ const broadcaster = params.get("broadcaster");
 const loaderWrapper = document.getElementById('loader-wrapper');
 
 async function preLoadBotList () {
-    console.log("file loaded");
     const botList = './bot_list.txt';
     const response = await fetch(botList);
     return await response.text();
@@ -14,6 +13,7 @@ let username = localStorage.getItem('username');
 let footerState = localStorage.getItem('footer');
 
 if(broadcaster){
+    setUserFilter();
     getChatters(broadcaster);
     setBroadcasterLS(broadcaster);
 } else if(username) {
@@ -61,24 +61,34 @@ function resetButton() {
     loadBroadcaster();
 }
 
+function setUserFilter() {
+    if (document.getElementById("userlist")) {
+        let LSInput = localStorage.getItem('userlist');
+        // if localstorage is filled prefill the field with localstorage data
+        if (LSInput) {
+            document.getElementById("userlist").value = LSInput;
+        }
+    }
+}
+
 function setBroadcasterLS(broadcaster){
     localStorage.setItem('username', broadcaster);
 }
 
-function hideFooter(){
+function hideFooter() {
     footer = document.getElementById('footer');
     footer.classList.toggle('main-footer--hide');
     footerText = document.getElementById('footer--hide__text');
-    if(footer.classList.contains("main-footer--hide") == true){
+    if (footer.classList.contains("main-footer--hide") == true) {
         footerText.innerText = 'Show Key';
         localStorage.setItem('footer', false);
-    }else{
+    } else {
         footerText.innerText = 'Hide Key';
         localStorage.setItem('footer', true);
     }
 }
 
-function filter_results(){
+function filter_results() {
     var input, chatters, table, li, i, txtValue;
     input = document.getElementById("username");
     inputValue = input.value.toLowerCase();
@@ -87,10 +97,9 @@ function filter_results(){
 
     if(inputValue != 0){
         for (i = 0; i < li.length; i++) {
-            //console.log(li[i]);
+            
             let element = li[i];
             txtValue = element.textContent || element.innerText;
-            //console.log(txtValue);
             
             if (txtValue.includes(inputValue)) {
                 element.style.display = "";
@@ -106,6 +115,49 @@ function filter_results(){
         }
     }
 }
+
+function apply_userlist(){
+    let LSInput, fieldInput, chatters, li, i, txtValue;
+
+    LSInput = localStorage.getItem('userlist');
+    console.log("LSInput =",LSInput);
+    fieldInput = document.getElementById("userlist").value.toLowerCase();
+    console.log("fieldInput = ",fieldInput);
+
+    if (fieldInput !== LSInput) {
+        if (fieldInput.length > 0) {
+            // write data from field to localstorage if different
+            localStorage.setItem('userlist', fieldInput);
+        }
+        else {
+            // delete localstorage key if field is emptied
+            localStorage.removeItem('userlist');
+        }
+    }
+    
+    chatters = document.getElementById("chatters");
+    li = chatters.getElementsByTagName("li");
+
+    if(fieldInput != 0){
+        for (i = 0; i < li.length; i++) {
+            let element = li[i];
+            txtValue = element.textContent || element.innerText;
+            
+            if (txtValue.includes(fieldInput)) {
+                element.classList.add("custom-user");
+                //element.style.display = "";
+            } else {
+                //element.style.display = "none";
+            }
+            
+        }
+    } else {
+        for (i = 0; i < li.length; i++) {
+            let element = li[i];
+            element.style.display = "";
+        }
+    }
+};
 
 function addCommas(nStr) {
     nStr += '';
@@ -186,7 +238,19 @@ function serviceCheck(user) {
     return serviceBot.includes(user);
 }
 
+function customUserCheck(user) {
+    // read list from localstorage
+    let customUser = [];
+    
+    if (localStorage.getItem('userlist')) {
+        customUser = localStorage.getItem('userlist');
+    }
+
+    return customUser.includes(user);
+}
+
 function getChatters(broadcaster) {
+
     const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster.toLowerCase()}`
     const broadcasterName = document.getElementById('broadcaster-name');
     broadcasterName.textContent=broadcaster.toLowerCase();
@@ -207,21 +271,35 @@ function getChatters(broadcaster) {
               "global_mods": [],
               "moderators": [
                 "streamelements",
-                "finitesingularity"
+                "finitesingularity",
+                "mattythreeshoes",
+                "dramaman"
               ],
               "staff": [
-                "zachbussey"
+                "zachbussey",
+                "slashie101"
               ],
               "viewers": [
                 "anna_banana_10",
+                "affewfw6235325",
+                "bestvieweroftwitch",
                 "commanderroot",
                 "creatisbot",
+                "robohubby",
+                "sc0ttzen",
+                "scg_noisy",
+                "sebi_96000",
+                "shadoow_lol",
+                "silva_lindow",
+                "slaan",
                 "sophiafox21",
                 "streambee_bot",
-                "tinarif"
+                "tinarif",
+                "standardvieweroftwitch"
               ],
               "vips": [
-                "fancyperson"
+                "fancyperson",
+                "timeenjoyed"
               ]
             }
           }
@@ -257,10 +335,13 @@ function getChatters(broadcaster) {
                         let user = userList[i];
                         listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
                         unorderedList.appendChild(listItem); 
-                        if (serviceCheck(userList[i])) {
+                        if (customUserCheck(userList[i])) {
+                            listItem.classList.add("custom-user");
+                        }
+                        else if (serviceCheck(userList[i])) {
                             listItem.classList.add("service-user");
                         }
-                        if (botCheck(userList[i],botList)) {
+                        else if (botCheck(userList[i],botList)) {
                             listItem.classList.add("bot-user");
                         }
                         

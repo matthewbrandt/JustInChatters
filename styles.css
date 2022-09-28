@@ -201,6 +201,12 @@ h2#broadcaster-name {
 	border: none !important;
   }
 
+#example .custom-user {
+	background-color: var(--saffron) !important;
+	color: var(--midnightexpress) !important;
+	border: none !important;
+  }
+
 #chatters {
 	display: flex;
 	flex-direction: column;
@@ -238,6 +244,14 @@ h2#broadcaster-name {
   }
 
 #chatters .service-user a {
+	color: var(--midnightexpress) !important;	
+}
+
+#chatters .custom-user {
+	background-color: var(--saffron) !important;
+}
+
+#chatters .custom-user a {
 	color: var(--midnightexpress) !important;	
 }
 
@@ -340,12 +354,22 @@ h2#broadcaster-name {
 	border-top: 3px solid var(--athensgray);
 }
 .main-footer--hide{
-	bottom:-130px;
+	bottom:-240px;
 	transition: all 0.5s;
 }
 .main-footer--hide .footer--hide{
 	top:-35px;
 }
+
+.highlight-info {
+	padding-bottom: 30px;
+}
+
+.userlist input {
+	width: 490px;
+	font-size: 1rem;
+}
+
 @media screen and (max-width: 562px) {
 	.main-footer--hide{
 		bottom:-203px;
