@@ -354,7 +354,7 @@ h2#broadcaster-name {
 	border-top: 3px solid var(--athensgray);
 }
 .main-footer--hide{
-	bottom:-190px;
+	bottom:-240px;
 	transition: all 0.5s;
 }
 .main-footer--hide .footer--hide{
@@ -363,6 +363,11 @@ h2#broadcaster-name {
 
 .highlight-info {
 	padding-bottom: 30px;
+}
+
+.userlist input {
+	width: 490px;
+	font-size: 1rem;
 }
 
 @media screen and (max-width: 562px) {

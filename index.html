@@ -73,8 +73,16 @@
 							<li class="custom-user hide">highlighted* user</li>
 						</ul>
 					</div>
-					<div class="hide highlight-info">
-						*You can add highlighted users by entering their Twitch username into the field below and then reloading the page. You can enter multiple usernames as comma-separated values (e.g. user1,user2)
+					<div class="hide highlight-info userlist">
+						<p>*You can add highlighted users by entering their Twitch username(s) into the field below and then click anywhere on the page. You can enter multiple usernames as comma-separated values (e.g. user1,user2). The highlight overrides all other styles.</p>
+						<label for="userlist">user1,user2</label>
+						<input
+							type="text"
+							placeholder="user1,user2"
+							id="userlist"
+							name="userlist"
+						    onblur="apply_userlist()"
+						/>
 					</div>
 				</div>
 				<div class="footer--hide" onClick="hideFooter()">
