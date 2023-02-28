@@ -285,6 +285,7 @@ function getChatters(broadcaster) {
                 "bestvieweroftwitch",
                 "commanderroot",
                 "creatisbot",
+                "gnare",
                 "robohubby",
                 "sc0ttzen",
                 "scg_noisy",
@@ -316,7 +317,10 @@ function getChatters(broadcaster) {
             viewerCount-1;
         };
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
-        const botList = await loadedBotListPromise;
+        const botListRaw = await loadedBotListPromise;
+        const botList = botListRaw.split('\n');
+        console.log(botList.length + ' bots in list');
+
         for (key in data.chatters) {
             const userType = key;
             const excludeUserTypes = ['admins','broadcaster','global_mods'];
