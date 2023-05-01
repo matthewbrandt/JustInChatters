@@ -1,5 +1,8 @@
 # LurkReveal&trade;
 
+# DEPRECATION NOTICE
+## Due to Twitch's changes to the undocumented /tmi endpoints on April 4th 2023, this website no longer works.
+
 ## Summary
 
 LurkReveal&trade; is a tool that you can open as a website to get a visual representation of what users are in your Twitch chat.
