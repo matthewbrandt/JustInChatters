@@ -73,14 +73,8 @@ function displayAuthorizationPrompt() {
     params.append("response_type", "token");
     params.append("scope", "moderator:read:chatters");
     divItem.innerHTML = `<h3>Please login with Twitch to authorize LurkReveal to load your chatters.</h3>
-    <a href="https://id.twitch.tv/oauth2/authorize?${params}">Connect with Twitch</a>`;
+    <a class="button button-auth" href="https://id.twitch.tv/oauth2/authorize?${params}">Connect with Twitch</a>`;
     document.getElementById('chatters').append(divItem);
-}
-
-function resetButton() {
-    document.getElementById('subheader').innerHTML = '';
-    document.getElementById('chatters').innerHTML = '';
-    loadBroadcaster();
 }
 
 function setUserFilter() {
@@ -336,7 +330,7 @@ function getChatters(token, broadcaster) {
         }
     }).then(async function (data) {
         document.getElementById('chatters').innerHTML = '';
-        const viewerCount = data.total;
+        const viewerCount = data.total - 1;
 
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
         const botListRaw = await loadedBotListPromise;
@@ -350,7 +344,16 @@ function getChatters(token, broadcaster) {
         let unorderedList = document.createElement("ul");
         document.getElementById('chatters').append(divItem);
         divItem.append(unorderedList);
-        for (user of data.data) {
+        let userArr = data.data;
+        function sortChatters(a,b) {
+            return a.user_login < b.user_login ? -1 : a.user_login > b.user_login ? 1 : 0;
+        }
+        // sort chatters alphabetically
+        let sortedArr = userArr.sort(sortChatters);
+        // remove broadcaster from chatters list
+        let finalArr = sortedArr.filter(name => name.user_login != broadcaster.name);
+
+        for (user of finalArr) {
             let listItem = document.createElement("li");
             listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user.user_login}">${user.user_name}</a>`;
             unorderedList.appendChild(listItem); 
@@ -363,7 +366,6 @@ function getChatters(token, broadcaster) {
             else if (botCheck(user.user_login, botList)) {
                 listItem.classList.add("bot-user");
             }
-                
         };
         loaderWrapper.classList.add('loader-hide');
     }).catch(function (err) {
