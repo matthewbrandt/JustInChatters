@@ -1,5 +1,9 @@
+const CLIENT_ID = '5rocrgu81rtj4mw65d1j78rue4dszu';
+const REDIRECT_URI = 'http://localhost:5500';
+
 const params = new URLSearchParams(window.location.search);
-const broadcaster = params.get("broadcaster");
+const hash = new URLSearchParams(document.location.hash.slice(1));
+
 const loaderWrapper = document.getElementById('loader-wrapper');
 
 async function preLoadBotList () {
@@ -9,50 +13,66 @@ async function preLoadBotList () {
 }
 const loadedBotListPromise = preLoadBotList();
 
-let username = localStorage.getItem('username');
 let footerState = localStorage.getItem('footer');
+let tokenPromise = upsertToken(hash.get('access_token'));
 
-if(broadcaster){
-    setUserFilter();
-    getChatters(broadcaster);
-    setBroadcasterLS(broadcaster);
-} else if(username) {
-    getChatters(username);
-    urlUpdate(username);
-}else{
-    loadBroadcaster();
-}
-if(JSON.parse(footerState) === true ){
+tokenPromise.then(async function(twitchToken) {
+    if (twitchToken) {
+        console.log("Resolved token");
+        let broadcaster = JSON.parse(localStorage.getItem('broadcaster'));
+        getChatters(twitchToken, broadcaster);
+    } else {
+        console.log("No token resolved");
+        displayAuthorizationPrompt();
+    }
+    
+});
+if(JSON.parse(footerState) === true ) {
     hideFooter();
 }
 
-function clickHandler() {
-    broadcasterInput = document.getElementById('broadcaster').value;
-    urlUpdate(broadcasterInput);
-    getChatters(broadcasterInput);
-    setBroadcasterLS(broadcasterInput);
-    footer = document.getElementById('footer');
-    footer.style.display = 'block';
+function upsertToken(incomingToken) {
+    if (incomingToken) {
+        console.log("New incoming token");
+        localStorage.setItem('access_token', incomingToken);
+        setUserFilter();
+        return fetchUserInfo(incomingToken);
+    }
+    console.log("Get cached token");
+    
+    return Promise.resolve(localStorage.getItem('access_token'));
 }
 
-function urlUpdate(broadcaster) {
-    const url = new URL(window.location);
-    url.searchParams.set('broadcaster', broadcaster);
-    window.history.pushState({}, '', url);
+function fetchUserInfo(token) {
+    const url = 'https://id.twitch.tv/oauth2/validate';
+
+    return fetch(url, {
+        headers: { Authorization: 'Bearer ' + token }
+    }).then(async function(response) {
+        if (response.ok) {
+            return await response.json();
+            //return testData;
+        } else {
+            return Promise.reject(response);
+        }
+    }).then(async function (data) {
+        localStorage.setItem('broadcaster', JSON.stringify({ "id": data.user_id, "name": data.login }));
+        return token;
+    });
 }
 
-function loadBroadcaster() {
+function displayAuthorizationPrompt() {
     footer = document.getElementById('footer');
     footer.style.display = 'none';
     let divItem = document.createElement("div");
-    divItem.innerHTML = `<h3>Please input your broadcaster name to view the users in the channel.</h3>
-        <form class="search broadcaster-search-wrapper">
-        <label for="broadcaster">Enter broadcaster username</label>
-        <input class="broadcaster-search" type="text" placeholder="Enter broadcaster username" id="broadcaster" name="broadcaster"/>
-        <button id="broadcaster-button" class="button" onclick="clickHandler()">Go</button>
-        </form>`;
+    let params = new URLSearchParams();
+    params.append("client_id", CLIENT_ID);
+    params.append("redirect_uri", REDIRECT_URI);
+    params.append("response_type", "token");
+    params.append("scope", "moderator:read:chatters");
+    divItem.innerHTML = `<h3>Please login with Twitch to authorize LurkReveal to load your chatters.</h3>
+    <a href="https://id.twitch.tv/oauth2/authorize?${params}">Connect with Twitch</a>`;
     document.getElementById('chatters').append(divItem);
- 
 }
 
 function resetButton() {
@@ -69,10 +89,6 @@ function setUserFilter() {
             document.getElementById("userlist").value = LSInput;
         }
     }
-}
-
-function setBroadcasterLS(broadcaster){
-    localStorage.setItem('username', broadcaster);
 }
 
 function hideFooter() {
@@ -249,11 +265,15 @@ function customUserCheck(user) {
     return customUser.includes(user);
 }
 
-function getChatters(broadcaster) {
+function getChatters(token, broadcaster) {
+    const requestParams = new URLSearchParams();
+    requestParams.append("broadcaster_id", broadcaster.id);
+    requestParams.append("moderator_id", broadcaster.id);
+    requestParams.append("first", 1000);
 
-    const url = `https://jwalter-chatters.builtwithdark.com/?broadcaster=${broadcaster.toLowerCase()}`
+    const url = `https://api.twitch.tv/helix/chat/chatters?${requestParams}`;
     const broadcasterName = document.getElementById('broadcaster-name');
-    broadcasterName.textContent=broadcaster.toLowerCase();
+    broadcasterName.textContent=broadcaster.name.toLowerCase();
 
     [].forEach.call(document.querySelectorAll('.hide'), function (el) {
         el.classList.remove('hide');
@@ -261,7 +281,9 @@ function getChatters(broadcaster) {
 
     loaderWrapper.classList.remove('loader-hide');
 
-    fetch(url).then(async function (response) {
+    fetch(url, {
+        headers: { Authorization: 'Bearer ' + token, 'Client-Id': CLIENT_ID }
+      }).then(async function (response) {
         let testData = {
             "_links": {},
             "chatter_count": 7,
@@ -312,46 +334,36 @@ function getChatters(broadcaster) {
         }
     }).then(async function (data) {
         document.getElementById('chatters').innerHTML = '';
-        const viewerCount = data.chatter_count;
-        if (data.chatters.broadcaster.length > 0) {
-            viewerCount-1;
-        };
+        const viewerCount = data.total;
+
         document.querySelector('#totalcount span').innerHTML = addCommas(viewerCount);
         const botListRaw = await loadedBotListPromise;
         const botList = botListRaw.split('\n');
         console.log(botList.length + ' bots in list');
 
-        for (key in data.chatters) {
-            const userType = key;
+        const userType = 'Chatter';
+        let divItem = document.createElement("div");
+        divItem.innerHTML = `<h3>${userType} (${addCommas(viewerCount)})</h3>`;
+        divItem.classList.add('row', userType);
+        let unorderedList = document.createElement("ul");
+        document.getElementById('chatters').append(divItem);
+        divItem.append(unorderedList);
+        for (user of data.data) {
             const excludeUserTypes = ['admins','broadcaster','global_mods'];
-            const userList = data.chatters[userType];
-            if (userList.length > 0 && excludeUserTypes.indexOf(userType) == -1) {
-                if (userType !== '') {
 
-                    let divItem = document.createElement("div");
-                    divItem.innerHTML = `<h3>${userType} (${addCommas(userList.length)})</h3>`;
-                    divItem.classList.add('row', userType);
-                    let unorderedList = document.createElement("ul");
-                    document.getElementById('chatters').append(divItem);
-                    divItem.append(unorderedList);
-                    for (let i = 0; i < userList.length; i++) {
-                        let listItem = document.createElement("li");
-                        let user = userList[i];
-                        listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user}">${user}</a>`;
-                        unorderedList.appendChild(listItem); 
-                        if (customUserCheck(userList[i])) {
-                            listItem.classList.add("custom-user");
-                        }
-                        else if (serviceCheck(userList[i])) {
-                            listItem.classList.add("service-user");
-                        }
-                        else if (botCheck(userList[i],botList)) {
-                            listItem.classList.add("bot-user");
-                        }
-                        
-                    }
-                }
+            let listItem = document.createElement("li");
+            listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user.user_login}">${user.user_name}</a>`;
+            unorderedList.appendChild(listItem); 
+            if (customUserCheck(user.user_login)) {
+                listItem.classList.add("custom-user");
             }
+            else if (serviceCheck(user.user_login)) {
+                listItem.classList.add("service-user");
+            }
+            else if (botCheck(user.user_login, botList)) {
+                listItem.classList.add("bot-user");
+            }
+                
         };
         loaderWrapper.classList.add('loader-hide');
     }).catch(function (err) {
@@ -360,7 +372,7 @@ function getChatters(broadcaster) {
 
     setTimeout(function() {
         
-        getChatters(broadcaster);
+        getChatters(token, broadcaster);
 
     }, 180000); // every 3 mins
 }
