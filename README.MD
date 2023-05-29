@@ -1,8 +1,5 @@
 # LurkReveal&trade;
 
-# DEPRECATION NOTICE
-## Due to Twitch's changes to the undocumented /tmi endpoints on April 4th 2023, this website no longer works.
-
 ## Summary
 
 LurkReveal&trade; is a tool that you can open as a website to get a visual representation of what users are in your Twitch chat.
@@ -10,11 +7,8 @@ LurkReveal&trade; is a tool that you can open as a website to get a visual repre
 ## Usage
 
 - Go to https://matthewbrandt.github.io/lurkreveal
-- Input your broadcaster username in the input field
+- Authorize the app to your Twitch account
 - Enjoy!
-
-## Categories & Colours
-Each category has it's own colour, appropriately using the colours from the Twitch UI. If there are no chatters in that category in your stream, the entire category is hidden (e.g. "Staff").
 
 ### Known Bots
 Bots are classified as such by multiple different websites in different ways. In general, it can be said that bots connect to multiple (10+) different chats via IRC directly and are therefore not watching your stream. There are currently `204'307` bots in the list here! If a bot is known for providing a particular service, see below. *FYI: The recent (2022-09-25) bot account influx on Twitch of nearly 4M accounts is not accounted for here.*

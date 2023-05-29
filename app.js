@@ -1,9 +1,11 @@
 const CLIENT_ID = '5rocrgu81rtj4mw65d1j78rue4dszu';
-const REDIRECT_URI = 'http://localhost:5500';
+// when on PROD
+const REDIRECT_URI = 'https://matthewbrandt.github.io/lurkreveal';
+// when on LOCAL
+// const REDIRECT_URI = 'http://localhost:5500';
 
 const params = new URLSearchParams(window.location.search);
 const hash = new URLSearchParams(document.location.hash.slice(1));
-
 const loaderWrapper = document.getElementById('loader-wrapper');
 
 async function preLoadBotList () {
@@ -349,8 +351,6 @@ function getChatters(token, broadcaster) {
         document.getElementById('chatters').append(divItem);
         divItem.append(unorderedList);
         for (user of data.data) {
-            const excludeUserTypes = ['admins','broadcaster','global_mods'];
-
             let listItem = document.createElement("li");
             listItem.innerHTML = `<a target="_blank" href="https://twitch.tv/${user.user_login}">${user.user_name}</a>`;
             unorderedList.appendChild(listItem); 
