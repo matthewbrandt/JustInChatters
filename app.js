@@ -1,5 +1,5 @@
-const CLIENT_ID = 'SET YOUR CLIENT ID HERE';
-const REDIRECT_URI = 'REDIRECT URI REGISTERED FOR THE ABOVE CLIENT ID';
+const CLIENT_ID = '5rocrgu81rtj4mw65d1j78rue4dszu';
+const REDIRECT_URI = 'http://localhost:5500';
 
 const params = new URLSearchParams(window.location.search);
 const hash = new URLSearchParams(document.location.hash.slice(1));
