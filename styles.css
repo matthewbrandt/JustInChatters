@@ -39,7 +39,12 @@ ul {
 }
 
 a {
+	color: var(--athensgray);
 	text-decoration: none;
+}
+
+a:visited {
+	color: var(--athensgray);
 }
 
 h3 {
@@ -139,6 +144,11 @@ h2#broadcaster-name {
 	cursor: pointer;
 }
 
+.button-auth {
+	margin-top: 0.5rem;
+	padding: 1rem 1rem;
+}
+
 #totalcount {
 	font-size: 2rem;
 	font-weight: 600;
@@ -223,6 +233,7 @@ h2#broadcaster-name {
 #chatters .row ul li {
 	padding: 1rem;
 	font-size: 14px;
+	color: var(--black);
 	background-color: var(--monsoon);
 	display: flex;
 	align-items: center;
