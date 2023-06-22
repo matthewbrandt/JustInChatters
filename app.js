@@ -1,6 +1,6 @@
 const CLIENT_ID = '5rocrgu81rtj4mw65d1j78rue4dszu';
 // when on PROD
-const REDIRECT_URI = 'https://matthewbrandt.github.io/justinchatters';
+const REDIRECT_URI = 'https://matthewbrandt.github.io/JustInChatters';
 // when on LOCAL
 // const REDIRECT_URI = 'http://localhost:5500';
 
