@@ -1,12 +1,12 @@
-# LurkReveal&trade;
+# JustInChatters (formerly LurkReveal&trade;)
 
 ## Summary
 
-LurkReveal&trade; is a tool that you can open as a website to get a visual representation of what users are in your Twitch chat.
+JustInChatters is a tool that you can open as a website to get a visual representation of what users are in your Twitch chat.
 
 ## Usage
 
-- Go to https://matthewbrandt.github.io/lurkreveal
+- Go to https://matthewbrandt.github.io/JustInChatters
 - Authorize the app to your Twitch account
 - Enjoy!
 
@@ -18,28 +18,29 @@ Some bots are connected to your chat because they provide a service like stream 
 
 ## More Information
 
-The word `lurker` is commonly used within the Twitch community to loosely describe users that are hanging out in your channel, but are not speaking in chat.
+The word `lurker` is commonly used within the Twitch community to loosely describe users that are hanging out in your chat but haven't sent any messages.
 
-There are _many_ reasons why a user may be in your stream and not chatting e.g.
+There are _many_ reasons why a user may be not chatting:
 
-- is away from keyboard (AFK)
-- is on a phonecall and cannot write
-- was part of a raid into your channel and is seeing a pre-roll ad
+- away from keyboard (AFK)
+- on a phonecall and cannot write
+- part of a raid into your channel and is seeing an ad
 - doesn't feel confident in writing in your stream's language(s)
 - ...is happy to just watch your stream!
 
-The streamer must accept that _all_ of these reasons are legitimate reasons! It's not for the streamer to judge users for the way a user chooses to participate in the stream. People are free to consume your content as they choose.
+The streamer must accept that _all_ of these are legitimate reasons! It's not for the streamer to judge users for the way a user chooses to participate in the stream. People are free to consume your content as they choose.
 
 ## Purpose
 
-This is **not** a tool that is used for spying on Twitch users in your chat and calling them out for lurking. Twitch is fundamentally an open, caring community and appreciates that each person is unique in their own way.
+This is **not** a tool that is used for spying on Twitch users in your chat and calling them out in mean way. Twitch is fundamentally an open, caring community and appreciates that each person is unique in their own way.
 
-LurkReveal&trade; tool is for streamers to see what users are in their chat for different reasons:
+The tool is for streamers to see what users are in their chat for different reasons:
 
-- keep an eye out for other streamers who may be friends, potential incoming raids, etc.
+- keep an eye out for other streamers who may be friends, potential raids, etc.
 - monitor against potential hate raids or other hate events
 - understand overall chat engagement compared to all users in chat
 - easily identify bot accounts (and deal with them as desired)
+- quickly find if someone is in your chat, e.g. answering a question they had previously
 - etc.
 
 ## Additional Features
