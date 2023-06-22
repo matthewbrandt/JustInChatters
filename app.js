@@ -1,6 +1,6 @@
 const CLIENT_ID = '5rocrgu81rtj4mw65d1j78rue4dszu';
 // when on PROD
-const REDIRECT_URI = 'https://matthewbrandt.github.io/lurkreveal';
+const REDIRECT_URI = 'https://matthewbrandt.github.io/justinchatters';
 // when on LOCAL
 // const REDIRECT_URI = 'http://localhost:5500';
 
@@ -72,7 +72,7 @@ function displayAuthorizationPrompt() {
     params.append("redirect_uri", REDIRECT_URI);
     params.append("response_type", "token");
     params.append("scope", "moderator:read:chatters");
-    divItem.innerHTML = `<h3>Please login with Twitch to authorize LurkReveal to load your chatters.</h3>
+    divItem.innerHTML = `<h3>Please login with Twitch to authorize JustInChatters to load your chatters.</h3>
     <a class="button button-auth" href="https://id.twitch.tv/oauth2/authorize?${params}">Connect with Twitch</a>`;
     document.getElementById('chatters').append(divItem);
 }
